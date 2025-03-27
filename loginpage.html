@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Login</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/loginpagestyle.css" />
   </head>
   <body>
@@ -15,49 +14,57 @@
         <div
           class="d-flex flex-wrap align-items-center justify-content-between gap-3"
         >
-          <!-- Logo dan Toggle Sidebar -->
           <div class="d-flex align-items-center">
-            <a href="index.html" class="d-block" id="sidebar-toggle">
-              <button class="buttonberanda" hr>Beranda</button>
+            <a href="index.html">
+              <button class="buttonberanda">Beranda</button>
             </a>
           </div>
         </div>
       </div>
     </header>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <!-- Content -->
-    <img class="background" src="rakbuku.png" alt="" />
+
+    <!-- Spacer -->
+    <div style="height: 100px"></div>
+
+    <!-- Background Image -->
+    <img class="background" src="img/rakbuku.png" alt="Background Rak Buku" />
+
+    <!-- Login Container -->
     <div class="tempatlogin">
       <div class="loginbackground"></div>
       <div class="login-container">
-        <input type="email" placeholder="Email" />
-        <input class="password" type="password" placeholder="Password" />
+        <input type="email" placeholder="Email" required />
+        <input
+          class="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
         <button class="button login-button">Login</button>
-        <p style="color: rgb(255, 255, 255)" class="signin">
+        <p class="signin" style="color: white">
           Belum punya akun? <button class="button">Sign-in</button>
         </p>
       </div>
+
+      <!-- Opsi Login -->
       <div class="opsilogin">
-        <p style="color: rgb(255, 255, 255)">Atau login dengan:</p>
+        <p style="color: white">Atau login dengan:</p>
         <div class="social-login">
           <button style="background-color: white">
-            <img class="ikon" src="img/google.png" alt="" />Google
+            <img class="ikon" src="img/google.png" alt="Google Logo" /> Google
           </button>
           <button style="background-color: white">
-            <img class="ikon" src="img/facebook logo.png" alt="" />Facebook
+            <img class="ikon" src="img/facebook logo.png" alt="Facebook Logo" />
+            Facebook
           </button>
           <button style="background-color: white">
-            <img class="ikon" src="img/whatsapp.jpg" alt="" />Whatsapp
+            <img class="ikon" src="img/whatsapp.jpg" alt="WhatsApp Logo" />
+            WhatsApp
           </button>
         </div>
       </div>
     </div>
-    <br />
-    <br />
+
+    <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
