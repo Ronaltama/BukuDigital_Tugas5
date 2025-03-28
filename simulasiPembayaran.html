@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Transaksi Buku Digital</title>
-    
-  </head>
+    <title>Pembayaran</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
 
-  <style>
-    @font-face {
-    font-family:"Cuprum"; 
-    src:url("fonts/Cuprum.ttf"); 
-    font-weight:normal; 
-    } 
-    
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
       body {
-        margin: 0;
+        margin: 45px;
         padding: 20px;
         background-color: #f0f2f5;
       }
@@ -31,7 +31,7 @@
         margin-bottom: 20px;
       }
       h2 {
-        color: #1a73e8;
+        color: #ffc107;
         margin-top: 0;
       }
       .form-group {
@@ -62,7 +62,7 @@
         display: none;
       }
       .button {
-        background: #1a73e8;
+        background: #ffc107;
         color: white;
         border: none;
         padding: 10px 20px;
@@ -72,10 +72,7 @@
         margin-top: 15px;
       }
       .button:hover {
-        background: #1557b0;
-      }
-      .rental-duration {
-        display: none;
+        background: #c19206;
       }
       table {
         width: 100%;
@@ -96,67 +93,129 @@
         background-color: #f5f5f5;
       }
       
-  </style>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    </style>
+</head>
+ 
+ 
   <body>
+    <header class="bg-dark py-2 fixed-top ">
+        <div class="container">
+          <div
+            class="d-flex flex-wrap align-items-center justify-content-between gap-3" 
+          >
+       
+            <!-- Logo dan Toggle Sidebar -->
+            <div class="d-flex align-items-center">
+              <a href="#" class="d-block" id="sidebar-toggle">
+                <img src="img/logo3.png" alt="Logo" class="logo" width="150" />
+              </a>
+            </div>
+  
+            <!-- Search Form -->
+           <div class="flex-grow-1" style="max-width: 600px">
+                
+              <div class="input-group">
+                <input
+                  type="search"
+                  class="form-control"
+                  placeholder="Cari buku, penulis, atau genre..."
+                />
+                <button type="submit" class="btn btn-warning">Cari</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+    <!-- Navigation -->
+   <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" >
+    
+        <div class="container">
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Beranda</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="kategori.html">Kategori</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="keranjang.html">Keranjang</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="perpus.html">Library</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
     <div class="container">
       <!-- Transaction Form -->
       <div class="section">
-        <h2>Pembayaran</h2>
+        <h2>Pembayaran</h2> 
         <div class="form-group">
-          <label>Transaction Type:</label>
+          <label>Jenis Transaksi: Sewa</label>
           <select id="transaction-type">
-            <option value="">Select transaction type</option>
-            <option value="rental">sewa</option>
-            
+            <option value="rental">Sewa</option>
           </select>
         </div>
+
         <div class="form-group">
-          <label>Member Name:</label>
+          <label>Nama :</label>
           <input type="text" id="member-name" />
         </div>
+
         <div class="form-group">
-          <label>Total Books:</label>
+          <label>Total Buku:</label>
           <input type="number" id="book-quantity" min="1" />
         </div>
         <div id="book-selectors" class="book-selectors">
           <!-- Book selectors will be generated here -->
         </div>
-        <div id="rental-duration" class="form-group rental-duration">
-          <label>Rental Duration (days):</label>
+
+        <!-- Input Durasi -->
+        <div class="form-group">
+          <label>Durasi (dalam minggu):</label>
           <input type="number" id="duration" min="1" />
         </div>
+
+        <!-- Input Voucher -->
+        <div class="form-group">
+          <label>Kode Voucher:</label>
+          <input type="text" id="voucher-code" />
+        </div>
+
         <div class="form-group">
           <label>Payment Method:</label>
           <select id="payment-method">
-            <option value="">Select payment method</option>
-            <option value="cash">Cash</option>
+            <option value="">Silakan pilih metode pembayaran</option>
             <option value="transfer">Bank Transfer</option>
             <option value="ewallet">E-Wallet</option>
           </select>
         </div>
+
         <div class="result">
           <p>Subtotal: Rp. <span id="subtotal">0</span></p>
-          <p>Admin Fee: Rp. <span id="admin-fee">0</span></p>
-          <p>Total Payment: Rp. <span id="total-payment">0</span></p>
+          <p>Admin: Rp. <span id="admin-fee">0</span></p>
+          <p>Voucher Potongan: Rp. <span id="voucher-discount">0</span></p>
+          <p>Total Pembayaran: Rp. <span id="total-payment">0</span></p>
         </div>
-        <button class="button" onclick="submitTransaction()">
-          Submit Transaction
-        </button>
+        <button class="button" onclick="submitTransaction()">Submit Transaction</button>
       </div>
 
       <!-- History Section -->
       <div class="section">
-        <h2>Transaction History</h2>
+        <h2>Riwayat Transaksi</h2>
         <table>
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Type</th>
-              <th>Member</th>
-              <th>Books</th>
-              <th>Duration</th>
-              <th>Payment</th>
+              <th>Tanggal</th>
+              <th>Nama</th>
+              <th>Buku</th>
+              <th>Durasi</th>
+              <th>Voucher</th>
+              <th>Pembayaran</th>
               <th>Total</th>
             </tr>
           </thead>
@@ -168,25 +227,32 @@
     </div>
 
     <script>
-      // Book prices
+      // Book prices (Rental prices for 1 week)
       const BOOK_PRICES = {
         rental: {
-          "Book 1": 5000,
-          "Book 2": 5000,
-          "Book 3": 5000,
-        },
-        sale: {
-          "Book 1": 10000,
-          "Book 2": 10000,
-          "Book 3": 10000,
-        },
+          "Bulan": 10000,
+          "Cantik itu Luka": 15000,
+          "Amba": 15000,
+          "Laskar Pelangi": 15000,
+          "Hujan": 10000,
+          "Luka Cita": 20000,
+          "Filosofi Teras": 34000,
+          "Sisi Tergelap Surga": 50000,
+          "You do You": 30000,
+          "Gadis Kretek": 25000
+        }
       };
 
       // Admin fees
       const ADMIN_FEES = {
-        cash: 1000,
         transfer: 2000,
         ewallet: 2500,
+      };
+
+      // Voucher discounts (hardcoded)
+      const VOUCHER_DISCOUNTS = {
+        "DISCOUNT10": 0.1, // 10% discount
+        "HALFPRICE": 0.5,  // 50% discount
       };
 
       // Show/hide rental duration based on transaction type
@@ -208,15 +274,22 @@
         for (let i = 1; i <= quantity; i++) {
           const div = document.createElement("div");
           div.className = "form-group";
-          div.innerHTML = `
-                    <label>Book ${i}:</label>
-                    <select id="book-${i}" class="book-select">
-                        <option value="">Select a book</option>
-                        <option value="Book 1">Book 1</option>
-                        <option value="Book 2">Book 2</option>
-                        <option value="Book 3">Book 3</option>
-                    </select>
-                `;
+          div.innerHTML = ` 
+            <label>Book ${i}:</label>
+            <select id="book-${i}" class="book-select">
+                <option value="">Pilih judul buku</option>
+                <option value="Bulan">Bulan</option>
+                <option value="Cantik itu Luka">Cantik itu Luka</option>
+                <option value="Amba">Amba</option>
+                <option value="Hujan">Hujan</option>
+                <option value="Laskar Pelangi">Laskar Pelangi</option>
+                <option value="Luka Cita">Luka Cita</option>
+                <option value="Filosofi Teras">Filosofi Teras</option>
+                <option value="Sisi Tergelap Surga">Sisi Tergelap Surga</option>
+                <option value="You do You">You do You</option>
+                <option value="Gadis Kretek">Gadis Kretek</option>
+            </select>
+          `;
           container.appendChild(div);
         }
 
@@ -229,11 +302,10 @@
 
       // Update calculations
       function updateCalculations() {
-        const transactionType =
-          document.getElementById("transaction-type").value;
-        const duration =
-          parseInt(document.getElementById("duration").value) || 0;
+        const transactionType = document.getElementById("transaction-type").value;
+        const duration = parseInt(document.getElementById("duration").value) || 1;
         const payment = document.getElementById("payment-method").value;
+        const voucherCode = document.getElementById("voucher-code").value.trim();
 
         let subtotal = 0;
         const selectors = document.querySelectorAll(".book-select");
@@ -243,15 +315,23 @@
           }
         });
 
-        if (transactionType === "rental") {
-          subtotal *= duration;
-        }
+        // Apply duration multiplier
+        subtotal *= duration;
 
         const adminFee = payment ? ADMIN_FEES[payment] : 0;
-        const total = subtotal + adminFee;
 
+        // Apply voucher discount
+        let voucherDiscount = 0;
+        if (voucherCode && VOUCHER_DISCOUNTS[voucherCode]) {
+          voucherDiscount = subtotal * VOUCHER_DISCOUNTS[voucherCode];
+        }
+
+        const total = subtotal + adminFee - voucherDiscount;
+
+        // Update UI
         document.getElementById("subtotal").textContent = subtotal;
         document.getElementById("admin-fee").textContent = adminFee;
+        document.getElementById("voucher-discount").textContent = voucherDiscount;
         document.getElementById("total-payment").textContent = total;
       }
 
@@ -259,8 +339,8 @@
       function submitTransaction() {
         const type = document.getElementById("transaction-type").value;
         const member = document.getElementById("member-name").value;
-        const duration =
-          type === "rental" ? document.getElementById("duration").value : "-";
+        const duration = document.getElementById("duration").value;
+        const voucher = document.getElementById("voucher-code").value;
         const payment = document.getElementById("payment-method").value;
         const total = document.getElementById("total-payment").textContent;
 
@@ -274,6 +354,7 @@
           member,
           books.join(", "),
           duration,
+          voucher,
           payment,
           total
         );
@@ -281,18 +362,19 @@
       }
 
       // Add transaction to history
-      function addToHistory(type, member, books, duration, payment, total) {
+      function addToHistory(rental, member, books, duration, voucher, payment, total) {
         const table = document.getElementById("history-table");
         const row = table.insertRow(0);
         row.innerHTML = `
-                <td>${new Date().toLocaleDateString()}</td>
-                <td>${type}</td>
-                <td>${member}</td>
-                <td>${books}</td>
-                <td>${duration}</td>
-                <td>${payment}</td>
-                <td>Rp. ${total}</td>
-            `;
+          <td>${new Date().toLocaleDateString()}</td>
+          <td>${rental}</td>
+          <td>${member}</td>
+          <td>${book}</td>
+          <td>${durasi} minggu</td>
+          <td>${voucher}</td>
+          <td>${payment}</td>
+          <td>Rp. ${total}</td>
+        `;
       }
 
       // Reset form
@@ -301,11 +383,12 @@
         document.getElementById("member-name").value = "";
         document.getElementById("book-quantity").value = "";
         document.getElementById("duration").value = "";
+        document.getElementById("voucher-code").value = "";
         document.getElementById("payment-method").value = "";
         document.getElementById("book-selectors").style.display = "none";
-        document.getElementById("rental-duration").style.display = "none";
         document.getElementById("subtotal").textContent = "0";
         document.getElementById("admin-fee").textContent = "0";
+        document.getElementById("voucher-discount").textContent = "0";
         document.getElementById("total-payment").textContent = "0";
       }
 
@@ -316,13 +399,6 @@
           generateBookSelectors(this.value);
           updateCalculations();
         });
-
-      document
-        .getElementById("duration")
-        .addEventListener("input", updateCalculations);
-      document
-        .getElementById("payment-method")
-        .addEventListener("change", updateCalculations);
     </script>
   </body>
 </html>
