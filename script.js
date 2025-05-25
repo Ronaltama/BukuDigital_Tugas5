@@ -150,6 +150,3 @@ window.addEventListener("scroll", () => {
   }
   lastScroll = currentScroll;
 });
-
-// Perbaikan: Hapus baris di bawah ini karena sudah diatur pada blok DOMContentLoaded sebelumnya
-// document.querySelector("main").style.marginTop = `${headerHeight}px`;

@@ -340,11 +340,6 @@ header .btn-warning {
   max-width: 500px !important;
 }
 
-/* Body & Nav Padding/Margin */
-body {
-  padding-top: 60px; /* Sesuaikan dengan tinggi header */
-}
-
 nav {
   margin-top: 56px; /* Sesuaikan dengan tinggi header */
 }
