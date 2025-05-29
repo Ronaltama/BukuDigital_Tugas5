@@ -6,6 +6,7 @@
     <title>Buku Digital</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css" />
     <style>
@@ -57,29 +58,34 @@
       />
     </a>
     <div class="card-body">
-      <h5 class="card-title">Amba</h5>
-      <p class="card-text text-muted small">Laksmi Pamunjak</p>
-      <div
-        class="d-flex justify-content-between align-items-center mb-2"
-      >
-        <span class="badge bg-info">Baru</span>
-        <small class="text-muted">5 Maret 2025</small>
-      </div>
-      <div class="rating-stars mb-2">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star-half-alt"></i>
-        <span>(5.0)</span>
-      </div>
-      <div
-        class="d-flex justify-content-between align-items-center"
-      >
-        <span class="text-success fw-bold">Rp 75.000</span>
-        <span class="text-muted small">/ Sewa Rp 15.000</span>
-      </div>
-    </div>
+  <h5 class="card-title">Amba</h5>
+  <p class="card-text text-muted small">Laksmi Pamunjak</p>
+
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <span class="badge bg-info">Baru</span>
+    <small class="text-muted">5 Maret 2025</small>
+  </div>
+
+  <div class="rating-stars mb-2">
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star-half-alt"></i>
+    <span>(5.0)</span>
+  </div>
+
+  <!-- Harga & ikon shopping cart dalam satu baris -->
+  <div class="d-flex justify-content-between align-items-center">
+    <span class="text-success fw-bold">Rp 75.000</span>
+    <a href="#" class="text-success">
+                       <i class="fas fa-shopping-cart fa-lg"></i>
+                      </a>
+    </a>
+  </div>
+</div>
+
+
   </div>
 </div>
 
@@ -91,29 +97,33 @@
                     alt="Book Cover"
                   />
                   <div class="card-body">
-                    <h5 class="card-title">Sisi Tergelap Surga</h5>
-                    <p class="card-text text-muted small">Brian Krisna</p>
-                    <div
-                      class="d-flex justify-content-between align-items-center mb-2"
-                    >
-                      <span class="badge bg-info">Baru</span>
-                      <small class="text-muted">10 Maret 2025</small>
-                    </div>
-                    <div class="rating-stars mb-2">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star-half-alt"></i>
-                      <span>(4.7)</span>
-                    </div>
-                    <div
-                      class="d-flex justify-content-between align-items-center"
-                    >
-                      <span class="text-success fw-bold">Rp 70.000</span>
-                      <span class="text-muted small">/ Sewa Rp 10.000</span>
-                    </div>
-                  </div>
+  <h5 class="card-title">Sisi Tergelap Surga</h5>
+  <p class="card-text text-muted small">Brian Krisna</p>
+
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <span class="badge bg-info">Baru</span>
+    <small class="text-muted">10 Maret 2025</small>
+  </div>
+
+  <div class="rating-stars mb-2">
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star-half-alt"></i>
+    <span>(4.7)</span>
+  </div>
+
+  <!-- Harga dan ikon keranjang sejajar -->
+  <div class="d-flex justify-content-between align-items-center">
+    <span class="text-success fw-bold">Rp 70.000</span>
+    <a href="#" class="text-success">
+                       <i class="fas fa-shopping-cart fa-lg"></i>
+                      </a>
+    </a>
+  </div>
+</div>
+
                 </div>
               </div>
 
@@ -125,29 +135,32 @@
                     alt="Book Cover"
                   />
                   <div class="card-body">
-                    <h5 class="card-title">Bulan</h5>
-                    <p class="card-text text-muted small">Tere Liye</p>
-                    <div
-                      class="d-flex justify-content-between align-items-center mb-2"
-                    >
-                      <span class="badge bg-info">Baru</span>
-                      <small class="text-muted">5 Maret 2025</small>
-                    </div>
-                    <div class="rating-stars mb-2">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star-half-alt"></i>
-                      <span>(4.7)</span>
-                    </div>
-                    <div
-                      class="d-flex justify-content-between align-items-center"
-                    >
-                      <span class="text-success fw-bold">Rp 50.000</span>
-                      <span class="text-muted small">/ Sewa Rp 10.000</span>
-                    </div>
-                  </div>
+  <h5 class="card-title">Bulan</h5>
+  <p class="card-text text-muted small">Tere Liye</p>
+
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <span class="badge bg-info">Baru</span>
+    <small class="text-muted">5 Maret 2025</small>
+  </div>
+
+  <div class="rating-stars mb-2">
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star-half-alt"></i>
+    <span>(4.7)</span>
+  </div>
+
+  <!-- Harga dan ikon shopping cart sejajar -->
+  <div class="d-flex justify-content-between align-items-center">
+    <span class="text-success fw-bold">Rp 50.000</span>
+    <a href="#" class="text-success">
+                       <i class="fas fa-shopping-cart fa-lg"></i>
+                      </a>
+  </div>
+</div>
+
                 </div>
               </div>
               <div class="col">
@@ -178,7 +191,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 60.000</span>
-                      <span class="text-muted small">/ Sewa Rp 15.000</span>
+                      <a href="#" class="text-success">
+                       <i class="fas fa-shopping-cart fa-lg"></i>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -211,7 +226,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 80.000</span>
-                      <span class="text-muted small">/ Sewa Rp 20.000</span>
+                      <a href="#" class="text-success">
+                       <i class="fas fa-shopping-cart fa-lg"></i>
+                       </a>
                     </div>
                   </div>
                 </div>
@@ -244,7 +261,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 85.000</span>
-                      <span class="text-muted small">/ Sewa Rp 25.000</span>
+                      <a href="#" class="text-success">
+                     <i class="fas fa-shopping-cart fa-lg"></i>
+                    </a>
                     </div>
                   </div>
                 </div>
@@ -277,8 +296,10 @@
                     <div
                       class="d-flex justify-content-between align-items-center"
                     >
-                      <span class="text-success fw-bold">Rp 60.000</span>
-                      <span class="text-muted small">/ Sewa Rp 10.000</span>
+                      <span class="text-success fw-bold">Rp 60.000</span> 
+                      <a href="#" class="text-success">
+                      <i class="fas fa-shopping-cart fa-lg"></i>
+                      </a>    
                     </div>
                   </div>
                 </div>
@@ -313,7 +334,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 80.000</span>
-                      <span class="text-muted small">/ Sewa Rp 20.000</span>
+                      <a href="#" class="text-success">
+                      <i class="fas fa-shopping-cart fa-lg"></i>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -348,7 +371,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 85.000</span>
-                      <span class="text-muted small">/ Sewa Rp 25.000</span>
+                      <a href="#" class="text-success">
+                       <i class="fas fa-shopping-cart fa-lg"></i>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -390,7 +415,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 50.000</span>
-                      <span class="text-muted small">/ Sewa Rp 10.000</span>
+                      <a href="#" class="text-success">
+                      <i class="fas fa-shopping-cart fa-lg"></i>
+                       </a>
                     </div>
                   </div>
                 </div>
@@ -423,7 +450,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 60.000</span>
-                      <span class="text-muted small">/ Sewa Rp 15.000</span>
+                      <a href="#" class="text-success">
+                     <i class="fas fa-shopping-cart fa-lg"></i>
+                    </a>
                     </div>
                   </div>
                 </div>
@@ -457,7 +486,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 75.000</span>
-                      <span class="text-muted small">/ Sewa Rp 20.000</span>
+                      <a href="#" class="text-success">
+                      <i class="fas fa-shopping-cart fa-lg"></i>
+                     </a>
                     </div>
                   </div>
                 </div>
@@ -491,7 +522,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 90.000</span>
-                      <span class="text-muted small">/ Sewa Rp 25.000</span>
+                      <a href="#" class="text-success">
+                      <i class="fas fa-shopping-cart fa-lg"></i>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -534,7 +567,14 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 100.000</span>
-                      <span class="text-muted small">/ Sewa Rp 34.000</span>
+                      <form method="post" action="features/add_to_cart.php" class="d-inline">
+  <input type="hidden" name="id" value="1"> <!-- ID buku -->
+  <button type="submit" class="btn p-0 border-0 bg-transparent text-success">
+    <i class="fas fa-shopping-cart fa-lg"></i>
+  </button>
+</form>
+
+                        </a>
                     </div>
                   </div>
                 </div>              
@@ -568,7 +608,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 150.000</span>
-                      <span class="text-muted small">/ Sewa Rp 40.000</span>
+                      <a href="#" class="text-success">
+                     <i class="fas fa-shopping-cart fa-lg"></i>
+                    </a>
                     </div>
                   </div>
                 </div>              
@@ -602,7 +644,9 @@
                       class="d-flex justify-content-between align-items-center"
                     >
                       <span class="text-success fw-bold">Rp 200.000</span>
-                      <span class="text-muted small">/ Sewa Rp 50.000</span>
+                      <a href="#" class="text-success">
+                      <i class="fas fa-shopping-cart fa-lg"></i>
+                     </a>
                     </div>
                   </div>
                 </div>              
@@ -633,10 +677,12 @@
                       <span>(4.9)</span>
                     </div>
                     <div
-                      class="d-flex justify-content-between align-items-center"
+                      class="d-flex justify-content-between align-items-center mb-2"
                     >
                       <span class="text-success fw-bold">Rp 120.000</span>
-                      <span class="text-muted small">/ Sewa Rp 30.000</span>
+                      <a href="#" class="text-success">
+                      <i class="fas fa-shopping-cart fa-lg"></i>
+                      </a>
                     </div>
                   </div>
                 </div>              
