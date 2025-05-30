@@ -76,7 +76,7 @@
 
 <body>
   <?php
-    include("modular/headerBack.php");
+    include("modular/headerPenulis.php");
     // Sertakan file koneksi database
     include("koneksi.php");
 
@@ -450,7 +450,6 @@
     setupScroll('cheapest-books', 'cheapest-scroll-left', 'cheapest-scroll-right');
     setupScroll('most-expensive-books', 'most-expensive-scroll-left', 'most-expensive-scroll-right');
     setupScroll('recommendation-books', 'recommendation-scroll-left', 'recommendation-scroll-right');
-
   });
   </script>
 </body>
