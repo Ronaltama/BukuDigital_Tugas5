@@ -1,11 +1,11 @@
-<!-- inputProduk.php -->
+<!-- inputProduk.php -->/
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Input Produk Digital</title>
+  <title>Unggah Buku</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -45,15 +45,15 @@
 
   <div class="container mt-5 pt-5">
     <div class="card">
-      <div class="card-header">Form Input Produk Digital</div>
+      <div class="card-header">Informasi Buku</div>
       <div class="card-body">
         <form id="produkForm" action="outputProduk.php" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
-            <label class="form-label">Nama Produk</label>
-            <input type="text" name="nama" class="form-control" required />
+            <label class="form-label">Judul</label>
+            <input type="text" name="Judul Buku" class="form-control" required />
           </div>
           <div class="mb-3">
-            <label class="form-label">Nama Penjual</label>
+            <label class="form-label">N</label>
             <input type="text" name="penjual" class="form-control" required />
           </div>
           <div class="mb-3">
@@ -127,3 +127,4 @@
 </body>
 
 </html>
+
