@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
-  <link rel="stylesheet" href="/Tugas5/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/Tugas5/css/loginpagestyle.css" />
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../css/loginpagestyle.css" />
 
   <style>
   /* CSS untuk notifikasi error */
@@ -43,7 +43,7 @@
 
   <div style="height: 100px"></div>
 
-  <img class="background" src="/Tugas5/img/logo/rakbuku.jpg" alt="Background Rak Buku" />
+  <img class="background" src="../img/logo/rakbuku.jpg" alt="Background Rak Buku" />
 
   <div class="tempatlogin">
     <div class="loginbackground"></div>
@@ -71,21 +71,21 @@
       <p style="color: white">Atau login dengan:</p>
       <div class="social-login">
         <button style="background-color: white">
-          <img class="ikon" src="/Tugas5/img/logo/google.png" alt="Google Logo" /> Google
+          <img class="ikon" src="../img/logo/google.png" alt="Google Logo" /> Google
         </button>
         <button style="background-color: white">
-          <img class="ikon" src="/Tugas5/img/logo/facebook logo.png" alt="Facebook Logo" />
+          <img class="ikon" src="../img/logo/facebook logo.png" alt="Facebook Logo" />
           Facebook
         </button>
         <button style="background-color: white">
-          <img class="ikon" src="/Tugas5/img/logo/whatsapp.jpg" alt="WhatsApp Logo" />
+          <img class="ikon" src="../img/logo/whatsapp.jpg" alt="WhatsApp Logo" />
           WhatsApp
         </button>
       </div>
     </div>
   </div>
 
-  <script src="/Tugas5/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
