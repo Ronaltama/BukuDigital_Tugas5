@@ -9,7 +9,7 @@
           </button>
           <!-- Logo mengarah ke beranda -->
           <a href="index.php" class="d-block">
-            <img src="img/logo/logo3.png" alt="Logo" class="logo" width="150" />
+            <img src="../img/logo/logo3.png" alt="Logo" class="logo" width="150" />
           </a>
         </div>
 
@@ -76,7 +76,7 @@
       <a href="features/perpus.php" class="nav-link">
         <i class="bi bi-book me-2"></i> Perpustakaan
       </a>
-      <a href="features/inputProduk.php" class="nav-link">
+      <a href="features/UnggahBuku.php" class="nav-link">
         <i class="bi bi-book me-2"></i> Input Produk
       </a>
 
