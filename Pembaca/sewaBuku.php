@@ -1,8 +1,9 @@
 <?php
+session_start(); // Pastikan ini di baris paling atas
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-session_start(); // Pastikan ini di baris paling atas
+
 
 include '../koneksi.php';
 
