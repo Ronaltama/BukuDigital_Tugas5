@@ -1,6 +1,6 @@
 <?php
 // Ganti "PASSWORD_PLAIN_TEXT_DISINI" dengan password asli pengguna
-$passwordAsli = "ZayN#33"; // Contoh untuk PEN0002
+$passwordAsli = "Mellya@55"; // Contoh untuk PEN0002
 $hashPassword = password_hash($passwordAsli, PASSWORD_DEFAULT);
 echo "Password Asli: " . $passwordAsli . "<br>";
 echo "Hasil Hash: " . $hashPassword;

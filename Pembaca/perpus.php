@@ -13,13 +13,6 @@ ini_set('display_errors', 1);
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-  .buttonberanda {
-    background-color: #ffc107;
-    border-radius: 5px;
-    width: 100px;
-    height: 40px;
-  }
-
   body {
     background-color: #f8f9fa;
     padding-top: 70px;
@@ -46,7 +39,7 @@ ini_set('display_errors', 1);
 
 <body>
   <!-- Header -->
-  <?php include("../modular/headerBack.php"); ?>
+  <?php include("../modular/headerPembaca.php"); ?>
 
   <!-- Main Content -->
   <div class="container">

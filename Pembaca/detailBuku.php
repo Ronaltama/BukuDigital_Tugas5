@@ -1,11 +1,12 @@
 <?php
+session_start(); // <<<--- TAMBAHKAN INI DI AWAL detailBuku.php
 include '../koneksi.php';
 
 $idBuku = $_GET['id'] ?? '';
 
-$sql = "SELECT buku.*, penulis.username 
-        FROM buku 
-        JOIN penulis ON buku.id_penulis = penulis.id_penulis 
+$sql = "SELECT buku.*, penulis.username
+        FROM buku
+        JOIN penulis ON buku.id_penulis = penulis.id_penulis
         WHERE buku.id_buku = ?";
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, "s", $idBuku);
@@ -65,25 +66,22 @@ if (!$buku) {
       </div>
       <div class="card-body">
         <div class="row">
-          <!-- Gambar -->
           <div class="col-md-4 text-center">
             <img src="<?php echo htmlspecialchars($buku['cover_url']); ?>" alt="Cover Buku" class="img-fluid">
           </div>
-          <!-- Detail -->
           <div class="col-md-8">
             <h5><strong>Judul:</strong> <?php echo htmlspecialchars($buku['judul']); ?></h5>
             <p><strong>Penulis:</strong> <?php echo htmlspecialchars($buku['username']); ?></p>
             <p><strong>Tahun Terbit:</strong> <?php echo htmlspecialchars($buku['tanggal_upload']); ?></p>
             <p><strong>Deskripsi:</strong> <?php echo nl2br(htmlspecialchars($buku['deskripsi'])); ?></p>
-
-            <!-- Tombol Sewa -->
+            <p><strong>Harga Sewa:</strong> Rp<?php echo number_format($buku['harga_sewa'], 0, ',', '.'); ?>/bulan</p>
             <div class="mt-3">
-              <a href="keranjang.php?action=sewa&id=<?php echo htmlspecialchars($buku['id_buku']); ?>"
+              <a href="sewaBuku.php?id=<?php echo htmlspecialchars($buku['id_buku']); ?>"
                 class="btn btn-success btn-custom">
                 Sewa Buku
               </a>
             </div>
-            <a href="../index.php" class="btn btn-secondary mt-3">Kembali</a>
+            <a href="BerandaPembaca.php" class="btn btn-secondary mt-3">Kembali</a>
           </div>
         </div>
       </div>

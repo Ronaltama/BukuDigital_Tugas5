@@ -5,9 +5,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Buku Digital</title>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
   <style>
   /* Tambahkan atau sesuaikan gaya CSS yang dibutuhkan di sini */
   .scroll-container {
@@ -76,9 +76,10 @@
 
 <body>
   <?php
-    include("modular/headerPembaca.php");
+    session_start(); 
+    include("../modular/headerPembaca.php");
     // Sertakan file koneksi database
-    include("koneksi.php");
+    include("../koneksi.php");
 
     // Fungsi untuk menampilkan kartu buku
     function displayBookCards($result, $badge_class) {
@@ -91,7 +92,7 @@
     ?>
   <div class="col">
     <div class="card book-card shadow-sm h-100">
-      <a href="detail_buku.php?id=<?php echo $row['id_buku']; ?>">
+      <a href="detailBuku.php?id=<?php echo $row['id_buku']; ?>">
         <img src="<?php echo $row['cover_url']; ?>" class="card-img-top" alt="Book Cover" />
       </a>
       <div class="card-body d-flex flex-column">
@@ -117,16 +118,15 @@
           <span>(<?php echo number_format($row['rating'], 1); ?>)</span>
         </div>
         <div class="mt-auto">
-  <div class="d-flex justify-content-between align-items-center">
-    <span class="text-success fw-bold">Rp
-      <?php echo number_format($row['harga_sewa'], 0, ',', '.'); ?></span>
-  <a href="features/detailBuku.php?id=<?php echo $row['id_buku']; ?>" class="btn btn-sm btn-info" title="Lihat Detail">
-  Detail
-</a>
-</a>
-      <input type="hidden" name="id_buku" value="<?php echo $row['id_buku']; ?>">
-  </div>
-</div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-success fw-bold">Rp
+              <?php echo number_format($row['harga_sewa'], 0, ',', '.'); ?></span>
+            <a href="detailBuku.php?id=<?php echo $row['id_buku']; ?>" class="btn btn-sm btn-info" title="Lihat Detail">
+              Detail
+            </a>
+            <input type="hidden" name="id_buku" value="<?php echo $row['id_buku']; ?>">
+          </div>
+        </div>
 
       </div>
     </div>
@@ -180,6 +180,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'
                             ORDER BY
                                 b.tanggal_upload DESC
                             LIMIT 6";
@@ -224,6 +226,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'
                             ORDER BY
                                 b.rating DESC, b.tanggal_upload DESC -- Tambahkan tanggal_upload sebagai tie-breaker
                             LIMIT 6";
@@ -268,6 +272,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'
                             ORDER BY
                                 b.harga_sewa ASC, b.tanggal_upload DESC
                             LIMIT 6";
@@ -312,6 +318,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'
                             ORDER BY
                                 b.harga_sewa DESC, b.tanggal_upload DESC
                             LIMIT 6";
@@ -358,6 +366,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'
                             ORDER BY
                                 b.rating DESC
                             LIMIT 6)
@@ -375,6 +385,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'
                             ORDER BY
                                 b.harga_sewa ASC
                             LIMIT 6)
@@ -396,13 +408,13 @@
   </main>
 
   <?php
-    include("modular/footer.php");
+    include("../modular/footer.php"); // Path disesuaikan ke ../modular/footer.php
     ?>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
-  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
+  <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../script.js"></script>
   <script>
   // JavaScript untuk fungsionalitas scroll horizontal
   document.addEventListener('DOMContentLoaded', function() {

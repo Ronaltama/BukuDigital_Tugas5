@@ -7,6 +7,7 @@
   <title>Kategori Buku Digital</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../style.css" />
 
   <style>
@@ -26,20 +27,7 @@
   }
 
   html,
-  body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-  }
 
-  body {
-    background: var(--background-color);
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--text-color);
-    padding-top: 70px;
-    /* Menghindari navbar tertutup header */
-  }
 
   .container {
     flex: 1;
@@ -96,7 +84,7 @@
 </head>
 
 <body>
-  <?php include("../modular/header.php"); ?>
+  <?php include("../modular/headerPembaca.php"); ?>
 
   <!-- Kategori Buku -->
   <div class="container mt-4">
