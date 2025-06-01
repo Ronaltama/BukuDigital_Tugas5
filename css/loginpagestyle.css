@@ -352,9 +352,9 @@ footer {
 /* Loginpage */
 .background {
   position: absolute;
-  top: 1cm;
+  top: 0cm;
   width: 100%;
-  height: 900px;
+  height: 1200px;
 }
 .tempatlogin {
   position: relative;

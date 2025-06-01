@@ -45,9 +45,6 @@
             <a class="nav-link" href="features/kategori.php">Kategori</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="features/keranjang.php">Keranjang</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="features/perpus.php">Library</a>
           </li>
         </ul>
@@ -63,18 +60,15 @@
       <button type="button" class="btn-close btn-close-white" id="close-sidebar" aria-label="Close"></button>
     </div>
     <div class="nav flex-column">
-      <a href="index.php" class="nav-link">
-        <i class="bi bi-house-door me-2"></i> Beranda
-      </a>
-      <a href="features/kategori.php" class="nav-link">
-        <i class="bi bi-grid me-2"></i> Kategori Buku
-      </a>
-      <a href="features/keranjang.php" class="nav-link">
-        <i class="bi bi-cart me-2"></i> Keranjang Belanja
-      </a>
-      <a href="features/perpus.php" class="nav-link">
-        <i class="bi bi-book me-2"></i> Perpustakaan
-      </a>
+      <a href="BerandaPembaca.php" class="nav-link text-white">
+      <i class="bi bi-house-door me-2"></i> Beranda
+    </a>
+    <a href="features/kategori.php" class="nav-link text-white">
+      <i class="bi bi-grid me-2"></i> Kategori Buku
+    </a>
+    <a href="features/perpus.php" class="nav-link text-white">
+      <i class="bi bi-book me-2"></i> Perpustakaan
+    </a>
       <a href="features/inputProduk.php" class="nav-link">
         <i class="bi bi-book me-2"></i> Input Produk
       </a>

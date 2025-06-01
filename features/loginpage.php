@@ -35,11 +35,6 @@
 </head>
 
 <body>
-  <?php
-    // Include headerBack.php. Path relatif ini seharusnya sudah benar
-    // karena loginpage.php ada di 'features/' dan modular ada di 'Tugas5/'
-    include("../modular/headerBack.php");
-    ?>
 
   <div style="height: 100px"></div>
 

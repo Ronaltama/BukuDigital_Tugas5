@@ -76,7 +76,7 @@
 
 <body>
   <?php
-    include("modular/header.php");
+    include("modular/headerPembaca.php");
     // Sertakan file koneksi database
     include("koneksi.php");
 
@@ -120,7 +120,7 @@
   <div class="d-flex justify-content-between align-items-center">
     <span class="text-success fw-bold">Rp
       <?php echo number_format($row['harga_sewa'], 0, ',', '.'); ?></span>
-  <a href="features/loginpage.php" class="btn btn-sm btn-info" title="Lihat Detail">
+  <a href="features/detailBuku.php?id=<?php echo $row['id_buku']; ?>" class="btn btn-sm btn-info" title="Lihat Detail">
   Detail
 </a>
 </a>
