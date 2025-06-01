@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user_role === 'pembaca') {
             header("Location: ../index.php"); // Contoh redirect pembaca (ke root project)
         } else {
-            header("Location: ../index.php"); // Contoh redirect penulis (misal ada dashboard terpisah)
+            header("Location: ../berandaPenulis.php"); // Contoh redirect penulis (misal ada dashboard terpisah)
         }
         exit(); // Penting: selalu exit setelah header() redirect
     } else {

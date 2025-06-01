@@ -8,12 +8,8 @@
             <i class="fas fa-bars"></i>
           </button>
           <!-- Logo mengarah ke beranda -->
-<<<<<<< Updated upstream
-          <a href="index.php" class="d-block">
-=======
           <a href="indexPenulis.php" class="d-block">
->>>>>>> Stashed changes
-            <img src="img/logo/logo3.png" alt="Logo" class="logo" width="150" />
+            <img src="../img/logo/logo3.png" alt="Logo" class="logo" width="150" />
           </a>
         </div>
 
