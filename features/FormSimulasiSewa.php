@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-  <?php include("../modular/headerBack.php"); ?>
+  <?php include("../modular/header.php"); ?>
   <br>
   <div class="container mt-4">
     <h2 class="text-center text-success mb-4">Sewa Buku Digital Online</h2>

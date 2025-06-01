@@ -9,7 +9,7 @@
           </button>
           <!-- Logo mengarah ke beranda -->
           <a href="index.php" class="d-block">
-            <img src="../img/logo/logo3.png" alt="Logo" class="logo" width="150" />
+            <img src="img/logo/logo3.png" alt="Logo" class="logo" width="150" />
           </a>
         </div>
 
