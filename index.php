@@ -117,16 +117,16 @@
           <span>(<?php echo number_format($row['rating'], 1); ?>)</span>
         </div>
         <div class="mt-auto">
-  <div class="d-flex justify-content-between align-items-center">
-    <span class="text-success fw-bold">Rp
-      <?php echo number_format($row['harga_sewa'], 0, ',', '.'); ?></span>
-  <a href="features/loginpage.php" class="btn btn-sm btn-info" title="Lihat Detail">
-  Detail
-</a>
-</a>
-      <input type="hidden" name="id_buku" value="<?php echo $row['id_buku']; ?>">
-  </div>
-</div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-success fw-bold">Rp
+              <?php echo number_format($row['harga_sewa'], 0, ',', '.'); ?></span>
+            <a href="features/loginpage.php" class="btn btn-sm btn-info" title="Lihat Detail">
+              Detail
+            </a>
+            </a>
+            <input type="hidden" name="id_buku" value="<?php echo $row['id_buku']; ?>">
+          </div>
+        </div>
 
       </div>
     </div>
@@ -180,6 +180,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'
                             ORDER BY
                                 b.tanggal_upload DESC
                             LIMIT 6";
@@ -224,6 +226,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'
                             ORDER BY
                                 b.rating DESC, b.tanggal_upload DESC -- Tambahkan tanggal_upload sebagai tie-breaker
                             LIMIT 6";
@@ -268,6 +272,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'                                
                             ORDER BY
                                 b.harga_sewa ASC, b.tanggal_upload DESC
                             LIMIT 6";
@@ -312,6 +318,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'                                
                             ORDER BY
                                 b.harga_sewa DESC, b.tanggal_upload DESC
                             LIMIT 6";
@@ -358,6 +366,8 @@
                                 buku b
                             JOIN
                                 penulis p ON b.id_penulis = p.id_penulis
+                            WHERE
+                            b.status_verifikasi = 'terverifikasi'                                
                             ORDER BY
                                 b.rating DESC
                             LIMIT 6)

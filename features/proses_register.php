@@ -129,16 +129,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Pilihan role tidak valid.");
     }
 
-    if ($stmt_insert->execute()) {
-        echo "Registrasi berhasil sebagai " . $role . "! ID Anda: " . $new_user_id . ". Anda sekarang bisa <a href='loginpage.php'>login</a>.";
+if ($stmt_insert->execute()) {
+        echo "<script>alert('Registrasi berhasil sebagai $role! ID: $new_user_id');windwow.location='loginpage.php'; 
+        </script>";
         // Opsional: Redirect ke halaman login setelah berhasil
-        // header("Location: loginpage.php?reg_success=" . $role);
-        // exit();
+        // header("Location: loginpage.php?reg_success=" . $role); // Uncomment this line
+        exit(); // Uncomment this line
     } else {
         echo "Error registrasi: " . $stmt_insert->error;
     }
     $stmt_insert->close();
-
     // Tutup koneksi database
     $conn->close();
 

@@ -35,7 +35,6 @@
 </head>
 
 <body>
-
   <div style="height: 100px"></div>
 
   <img class="background" src="../img/logo/rakbuku.jpg" alt="Background Rak Buku" />
