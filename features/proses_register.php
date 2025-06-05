@@ -2,7 +2,7 @@
 // proses_register.php
 
 // Pastikan file koneksi.php berada di lokasi yang benar relatif terhadap proses_register.php
-include("../config/koneksi.php"); // Path diubah sesuai struktur C:\xampp\htdocs\Tugas5\features\config\koneksi.php
+include("../koneksi.php"); // Path diubah sesuai struktur C:\xampp\htdocs\Tugas5\features\config\koneksi.php
 
 // Fungsi untuk menghasilkan ID unik berbasis string
 // Fungsi ini akan mencari ID terakhir dengan prefix tertentu
@@ -130,14 +130,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 if ($stmt_insert->execute()) {
-        echo "<script>alert('Registrasi berhasil sebagai $role! ID: $new_user_id');windwow.location='loginpage.php'; 
-        </script>";
-        // Opsional: Redirect ke halaman login setelah berhasil
-        // header("Location: loginpage.php?reg_success=" . $role); // Uncomment this line
-        exit(); // Uncomment this line
-    } else {
-        echo "Error registrasi: " . $stmt_insert->error;
-    }
+    echo "<script>
+            alert('Registrasi berhasil sebagai $role! ID: $new_user_id');
+            window.location.href = 'loginpage.php'; 
+          </script>";
+    exit(); // Always good practice to exit after a redirect, even with JS
+} else {
+    echo "Error registrasi: " . $stmt_insert->error;
+}
     $stmt_insert->close();
     // Tutup koneksi database
     $conn->close();
