@@ -16,7 +16,6 @@
         <div class="flex-grow-1" style="max-width: 600px">
           <form action="hasil_pencarian.php" method="GET" class="input-group">
             <input type="search" name="query" class="form-control" placeholder="Cari buku atau penulis..." required />
-            required />
             <button type="submit" class="btn btn-warning">Cari</button>
           </form>
         </div>

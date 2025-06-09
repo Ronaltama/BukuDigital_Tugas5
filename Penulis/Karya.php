@@ -116,7 +116,7 @@ try {
               <?php if (!empty($karya['cover_url'])) : ?>
               <img src="<?php echo htmlspecialchars($karya['cover_url']); ?>"
                 alt="Cover Buku <?php echo htmlspecialchars($karya['judul'] ?? ''); ?>"
-                style="width: 80px; height: auto;">
+                style="width: 80px ; height:auto; ">
               <?php endif; ?>
             </td>
             <td><?php echo htmlspecialchars($karya['judul']); ?></td>
