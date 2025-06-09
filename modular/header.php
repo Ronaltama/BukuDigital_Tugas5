@@ -13,12 +13,12 @@
           </a>
         </div>
 
-        <!-- Search Form -->
         <div class="flex-grow-1" style="max-width: 600px">
-          <div class="input-group">
-            <input type="search" class="form-control" placeholder="Cari buku, penulis, atau genre..." />
+          <form action="hasil_pencarian.php" method="GET" class="input-group">
+            <input type="search" name="query" class="form-control" placeholder="Cari buku atau penulis..." required />
+            required />
             <button type="submit" class="btn btn-warning">Cari</button>
-          </div>
+          </form>
         </div>
 
         <!-- Login/Signup -->
@@ -43,10 +43,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="features/kategori.php">Kategori</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="features/perpus.php">Library</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -61,25 +57,10 @@
     </div>
     <div class="nav flex-column">
       <a href="BerandaPembaca.php" class="nav-link text-white">
-      <i class="bi bi-house-door me-2"></i> Beranda
-    </a>
-    <a href="features/kategori.php" class="nav-link text-white">
-      <i class="bi bi-grid me-2"></i> Kategori Buku
-    </a>
-    <a href="features/perpus.php" class="nav-link text-white">
-      <i class="bi bi-book me-2"></i> Perpustakaan
-    </a>
-      <a href="features/inputProduk.php" class="nav-link">
-        <i class="bi bi-book me-2"></i> Input Produk
+        <i class="bi bi-house-door me-2"></i> Beranda
       </a>
-      <a href="features/simulasiPembayaran.php" class="nav-link">
-        <i class="bi bi-book me-2"></i> Simulasi Pembayaran
-      </a>
-      <a href="features/detailBuku.php" class="nav-link">
-        <i class="bi bi-book me-2"></i> Detail Buku
-      </a>
-      <a href="features/FormSimulasiSewa.php" class="nav-link">
-        <i class="bi bi-book me-2"></i> Sewa Buku Digital
+      <a href="features/kategori.php" class="nav-link text-white">
+        <i class="bi bi-grid me-2"></i> Kategori Buku
       </a>
     </div>
   </div>
