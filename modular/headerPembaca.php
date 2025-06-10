@@ -84,7 +84,6 @@
         <div class="flex-grow-1" style="max-width: 600px">
           <form action="../Pembaca/hasil_pencarian.php" method="GET" class="input-group">
             <input type="search" name="query" class="form-control" placeholder="Cari buku atau penulis..." required />
-            required />
             <button type="submit" class="btn btn-warning">Cari</button>
           </form>
         </div>
@@ -129,13 +128,13 @@
         <i class="bi bi-house-door me-2"></i> Beranda
       </a>
       <a href="kategori.php" class="nav-link text-white">
-        <i class="bi bi-grid me-2"></i> Kategori Buku
+        <i class="bi bi-grid me-2"></i> Kategori
       </a>
-      <a href="keranjang.php" class="nav-link text-white">
+      <!-- <a href="keranjang.php" class="nav-link text-white">
         <i class="bi bi-cart me-2"></i> Keranjang Belanja
-      </a>
+      </a> -->
       <a href="perpus.php" class="nav-link text-white">
-        <i class="bi bi-book me-2"></i> Perpustakaan
+        <i class="bi bi-book me-2"></i> Library
       </a>
     </div>
   </div>

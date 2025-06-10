@@ -17,7 +17,6 @@ $stmt->bind_param("i", $id_pembaca);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +29,6 @@ $user = $result->fetch_assoc();
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="../style.css" />
   <style>
-  /* Tambahkan atau sesuaikan gaya CSS yang dibutuhkan di sini */
   .scroll-container {
     overflow-x: auto;
     /* Mengaktifkan scroll horizontal */
@@ -97,7 +95,6 @@ $user = $result->fetch_assoc();
 
 <body>
   <?php
-    session_start(); 
     include("../modular/headerPembaca.php");
     // Sertakan file koneksi database
     include("../koneksi.php");

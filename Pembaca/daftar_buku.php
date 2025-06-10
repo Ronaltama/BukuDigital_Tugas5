@@ -1,48 +1,41 @@
 <?php
-session_start();
+// Menampilkan semua error untuk debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Menyertakan koneksi
 include("../koneksi.php");
 
-$id_pembaca = $_SESSION['id_pembaca'] ?? null;
-$buku_sewaan = [];
-$pesan_error = '';
-
-if ($id_pembaca) {
-    // ================== PERUBAHAN ADA DI KLAUSA WHERE ==================
-    $sql = "SELECT 
-                buku.id_buku, 
-                buku.judul, 
-                penulis.username AS penulis,
-                buku.cover_url AS cover
-            FROM sewa
-            JOIN buku ON sewa.id_buku = buku.id_buku
-            JOIN penulis ON buku.id_penulis = penulis.id_penulis
-            WHERE sewa.id_pembaca = ? AND sewa.status_sewa = 'dipinjam'"; // <-- Tambahan kondisi di sini
-    // ===================================================================
-
-    $stmt = $conn->prepare($sql);
-    if ($stmt) {
-        $stmt->bind_param("s", $id_pembaca);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $buku_sewaan = $result->fetch_all(MYSQLI_ASSOC);
-        $stmt->close();
-    } else {
-        $pesan_error = "Terjadi kesalahan dalam persiapan query database.";
-    }
+// Memeriksa parameter kategori dari URL
+if (!isset($_GET['kategori'])) {
+    header("Location: kategori.php");
+    exit();
 }
-$conn->close();
+$kategori = $conn->real_escape_string($_GET['kategori']);
+
+// Query SQL untuk mengambil buku berdasarkan kategori
+$sql_filtered_books = "SELECT
+    b.id_buku, b.judul, p.username AS nama_penulis, b.cover_url, b.tanggal_upload,
+    b.rating, b.harga_sewa, b.kategori
+FROM buku AS b
+JOIN penulis AS p ON b.id_penulis = p.id_penulis
+WHERE b.kategori = ? AND b.status_verifikasi = 'terverifikasi'
+ORDER BY b.rating DESC, b.tanggal_upload DESC";
+
+// Menyiapkan dan menjalankan query
+$stmt = $conn->prepare($sql_filtered_books);
+$stmt->bind_param("s", $kategori);
+$stmt->execute();
+$result_filtered_books = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perpustakaan Digital - Buku Saya</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buku Kategori: <?php echo htmlspecialchars($kategori); ?></title>
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../style.css" />
@@ -119,44 +112,78 @@ $conn->close();
 
 <body>
   <?php include("../modular/headerPembaca.php"); ?>
-  <div class="container mt-5">
-    <h2 class="text-center text-primary mb-4">Buku Aktif Anda</h2>
 
-    <?php if (!$id_pembaca) : ?>
-    <div class="alert alert-warning text-center" role="alert">
-      Anda harus <a href="login.php" class="alert-link">login</a> terlebih dahulu untuk melihat buku Anda.
-    </div>
-    <?php elseif ($pesan_error) : ?>
-    <div class="alert alert-danger text-center" role="alert">
-      <?php echo htmlspecialchars($pesan_error); ?>
-    </div>
-    <?php elseif (empty($buku_sewaan)) : ?>
-    <div class="alert alert-info text-center" role="alert">
-      Anda tidak memiliki buku yang sedang aktif disewa.
-    </div>
-    <?php else : ?>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-      <?php foreach ($buku_sewaan as $buku) : ?>
-      <div class="col">
-        <div class="card h-100 book-card">
-          <?php $cover_path = !empty($buku['cover']) ? $buku['cover'] : 'default.jpg'; ?>
-          <img src="<?php echo htmlspecialchars($cover_path); ?>" class="card-img-top"
-            alt="Cover <?php echo htmlspecialchars($buku['judul']); ?>">
+  <main class="container my-5">
+    <h2 class="text-center mb-4 page-title">Kategori: <?php echo htmlspecialchars($kategori); ?></h2>
+
+    <div class="row">
+      <?php
+            // LOGIKA TIDAK LAGI MENGGUNAKAN FUNGSI, LANGSUNG DI SINI
+            if ($result_filtered_books && $result_filtered_books->num_rows > 0) {
+                // Perulangan untuk setiap baris data buku
+                while ($row = $result_filtered_books->fetch_assoc()) {
+                    // Pemrosesan data yang sebelumnya ada di dalam fungsi
+                    $rating_value = floatval($row['rating']);
+                    $full_stars = floor($rating_value);
+                    $half_star = ($rating_value - $full_stars >= 0.5);
+                    $empty_stars = 5 - $full_stars - ($half_star ? 1 : 0);
+            ?>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card book-card shadow-sm h-100">
+          <a href="detailBuku.php?id=<?php echo $row['id_buku']; ?>">
+            <img src="<?php echo htmlspecialchars($row['cover_url']); ?>" class="card-img-top"
+              alt="Cover <?php echo htmlspecialchars($row['judul']); ?>" style="height: 250px; object-fit: cover;" />
+          </a>
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title"><?php echo htmlspecialchars($buku['judul']); ?></h5>
-            <p class="card-text text-muted"><?php echo htmlspecialchars($buku['penulis']); ?></p>
-            <a href="detail.php?id=<?php echo $buku['id_buku']; ?>" class="btn btn-primary btn-sm mt-auto">Baca
-              Sekarang</a>
+            <h5 class="card-title text-truncate"><?php echo htmlspecialchars($row['judul']); ?></h5>
+            <p class="card-text text-muted small text-truncate"><?php echo htmlspecialchars($row['nama_penulis']); ?>
+            </p>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge bg-primary"><?php echo htmlspecialchars($row['kategori'] ?? 'Umum'); ?></span>
+            </div>
+            <div class="rating-stars mb-2">
+              <?php
+                                    for ($i = 0; $i < $full_stars; $i++) { echo '<i class="fas fa-star text-warning"></i>'; }
+                                    if ($half_star) { echo '<i class="fas fa-star-half-alt text-warning"></i>'; }
+                                    for ($i = 0; $i < $empty_stars; $i++) { echo '<i class="far fa-star text-warning"></i>'; }
+                                    ?>
+              <span>(<?php echo number_format($rating_value, 1); ?>)</span>
+            </div>
+            <div class="mt-auto">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-success fw-bold">Rp
+                  <?php echo number_format($row['harga_sewa'], 0, ',', '.'); ?></span>
+                <a href="detailBuku.php?id=<?php echo $row['id_buku']; ?>" class="btn btn-sm btn-info"
+                  title="Lihat Detail">
+                  Detail
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <?php endforeach; ?>
+      <?php
+                } // Akhir dari loop while
+            } else {
+                // Pesan jika tidak ada buku ditemukan
+                echo "<div class='col-12'><p class='alert alert-warning text-center'>Tidak ada buku yang ditemukan untuk kategori ini.</p></div>";
+            }
+            ?>
     </div>
-    <?php endif; ?>
-  </div>
-  <br>
-  <br>
-  <?php include("../modular/footerFitur.php"); ?>
+
+    <div class="text-center mt-5">
+      <a href="kategori.php" class="btn btn-warning"><i class="fas fa-arrow-left me-2"></i>Kembali ke Semua Kategori</a>
+    </div>
+  </main>
+
+  <?php 
+      include("../modular/footerFitur.php"); 
+      $stmt->close();
+      $conn->close();
+    ?>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../script.js"></script>
