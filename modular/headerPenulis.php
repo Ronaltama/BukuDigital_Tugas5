@@ -80,12 +80,11 @@
           </a>
         </div>
 
-        <!-- Search Form -->
         <div class="flex-grow-1" style="max-width: 600px">
-          <div class="input-group">
-            <input type="search" class="form-control" placeholder="Cari buku, penulis, atau genre..." />
-            <button type="submit" class="btn btn-warning">Cari</button>
-          </div>
+            <form action="../Penulis/hasil_pencarian.php" method="GET" class="input-group">
+              <input type="search" name="query" class="form-control" placeholder="Cari buku atau penulis..."/>
+              <button type="submit" class="btn btn-warning">Cari</button>
+            </form>
         </div>
 
         <!-- Tombol Profil -->

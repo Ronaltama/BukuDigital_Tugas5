@@ -71,15 +71,15 @@ try {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../style.css">
   <style>
-    /* Tambahan style jika diperlukan */
-    .aksi-button {
-      margin-right: 5px;
-    }
+  /* Tambahan style jika diperlukan */
+  .aksi-button {
+    margin-right: 5px;
+  }
 
-    .container {
-      padding-top: 20px;
-      /* Memberi sedikit ruang jika header fixed/absolute */
-    }
+  .container {
+    padding-top: 20px;
+    /* Memberi sedikit ruang jika header fixed/absolute */
+  }
   </style>
 </head>
 
@@ -89,54 +89,54 @@ try {
     <h2 class="text-center text-success mb-4">Karya Saya</h2>
 
     <?php if (!empty($errorMessage)) : ?>
-      <div class="alert alert-danger" role="alert">
-        <?php echo htmlspecialchars($errorMessage); ?>
-      </div>
+    <div class="alert alert-danger" role="alert">
+      <?php echo htmlspecialchars($errorMessage); ?>
+    </div>
     <?php endif; ?>
 
     <?php if (empty($daftarKarya) && empty($errorMessage)) : // Tampilkan hanya jika tidak ada error DAN daftar karya kosong 
     ?>
-      <p class="text-center">Anda belum mengunggah karya.</p>
+    <p class="text-center">Anda belum mengunggah karya.</p>
     <?php elseif (!empty($daftarKarya)) : ?>
-      <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-          <thead class="bg-light">
-            <tr>
-              <th>Cover</th>
-              <th>Judul Buku</th>
-              <th>Tanggal Upload</th>
-              <th>Status</th>
-              <th class="text-center">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($daftarKarya as $karya) : ?>
-              <tr>
-                <td>
-                  <?php if (!empty($karya['cover_url'])) : ?>
-                    <img src="../covers/<?php echo htmlspecialchars($karya['cover_url']); ?>"
-                      alt="Cover Buku <?php echo htmlspecialchars($karya['covers'] ?? ''); ?>"
-                      style="width: 50px; height: auto;">
-                  <?php endif; ?>
-                </td>
-                <td><?php echo htmlspecialchars($karya['judul']); ?></td>
-                <td><?php echo htmlspecialchars(isset($karya['tanggal_upload']) ? $karya['tanggal_upload'] : 'N/A'); ?></td>
-                <td><?php echo htmlspecialchars($karya['status_verifikasi'] ?? 'Menunggu Verifikasi'); ?></td>
-                <td class="text-center">
-                  <a href="EditKarya.php?id=<?php echo htmlspecialchars($karya['id_buku']); ?>"
-                    class="btn btn-sm btn-primary aksi-button">
-                    <i class="fas fa-edit"></i> Edit
-                  </a>
-                  <a href="Proses_Delete.php?id=<?php echo htmlspecialchars($karya['id_buku']); ?>"
-                    class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')">
-                    <i class="fas fa-trash"></i> Hapus
-                  </a>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
-      </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="bg-light">
+          <tr>
+            <th>Cover</th>
+            <th>Judul Buku</th>
+            <th>Tanggal Upload</th>
+            <th>Status</th>
+            <th class="text-center">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($daftarKarya as $karya) : ?>
+          <tr>
+            <td>
+              <?php if (!empty($karya['cover_url'])) : ?>
+              <img src="<?php echo htmlspecialchars($karya['cover_url']); ?>"
+                alt="Cover Buku <?php echo htmlspecialchars($karya['judul'] ?? ''); ?>"
+                style="width: 80px ; height:auto; ">
+              <?php endif; ?>
+            </td>
+            <td><?php echo htmlspecialchars($karya['judul']); ?></td>
+            <td><?php echo htmlspecialchars(isset($karya['tanggal_upload']) ? $karya['tanggal_upload'] : 'N/A'); ?></td>
+            <td><?php echo htmlspecialchars($karya['status_verifikasi'] ?? 'Menunggu Verifikasi'); ?></td>
+            <td class="text-center">
+              <a href="EditKarya.php?id=<?php echo htmlspecialchars($karya['id_buku']); ?>"
+                class="btn btn-sm btn-primary aksi-button">
+                <i class="fas fa-edit"></i> Edit
+              </a>
+              <a href="Proses_Delete.php?id=<?php echo htmlspecialchars($karya['id_buku']); ?>"
+                class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')">
+                <i class="fas fa-trash"></i> Hapus
+              </a>
+            </td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
     <?php endif; ?>
 
     <div class="mt-3 text-center"> <a href="UnggahBuku.php" class="btn btn-success">
