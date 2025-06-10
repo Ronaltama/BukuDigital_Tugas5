@@ -41,7 +41,7 @@
             <a class="nav-link" href="index.php">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="features/kategori.php">Kategori</a>
+            <a class="nav-link" href="kategori.php">Kategori</a>
         </ul>
       </div>
     </div>
@@ -55,10 +55,10 @@
       <button type="button" class="btn-close btn-close-white" id="close-sidebar" aria-label="Close"></button>
     </div>
     <div class="nav flex-column">
-      <a href="BerandaPembaca.php" class="nav-link text-white">
+      <a href="index.php" class="nav-link text-white">
         <i class="bi bi-house-door me-2"></i> Beranda
       </a>
-      <a href="features/kategori.php" class="nav-link text-white">
+      <a href="kategori.php" class="nav-link text-white">
         <i class="bi bi-grid me-2"></i> Kategori Buku
       </a>
     </div>
