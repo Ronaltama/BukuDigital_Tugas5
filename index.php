@@ -91,7 +91,7 @@
     ?>
   <div class="col">
     <div class="card book-card shadow-sm h-100">
-      <a href="detail_buku.php?id=<?php echo $row['id_buku']; ?>">
+      <a href="features/loginpage.php">
         <img src="<?php echo $row['cover_url']; ?>" class="card-img-top" alt="Book Cover" />
       </a>
       <div class="card-body d-flex flex-column">

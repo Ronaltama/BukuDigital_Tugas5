@@ -1,3 +1,24 @@
+<?php
+session_start();
+include("../koneksi.php");
+
+// Cek apakah user sudah login
+if (!isset($_SESSION['id_pembaca'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$id_pembaca = $_SESSION['id_pembaca'];
+
+// Contoh: Ambil data user
+$sql = "SELECT username FROM pembaca WHERE id_pembaca = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id_pembaca);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

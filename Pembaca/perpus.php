@@ -1,6 +1,16 @@
 <?php
+session_start();
+include("../koneksi.php"); // Pastikan ini file koneksi ke database
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+// Cek apakah pembaca sudah login
+$id_pembaca = $_SESSION['id_pembaca'] ?? null;
+
+if (!$id_pembaca) {
+  echo "<p class='text-danger text-center'>Anda belum login sebagai pembaca.</p>";
+  exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,27 +23,26 @@ ini_set('display_errors', 1);
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-  body {
-    background-color: #f8f9fa;
-    padding-top: 70px;
-    /* Sesuaikan dengan tinggi header dan navbar */
-  }
+    body {
+      background-color: #f8f9fa;
+      padding-top: 70px;
+    }
 
-  .card-img-top {
-    height: auto;
-    max-height: 300px;
-    object-fit: contain;
-    background-color: #f8f9fa;
-  }
+    .card-img-top {
+      height: auto;
+      max-height: 300px;
+      object-fit: contain;
+      background-color: #f8f9fa;
+    }
 
-  .book-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
+    .book-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-  .book-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
+    .book-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 
@@ -43,81 +52,42 @@ ini_set('display_errors', 1);
 
   <!-- Main Content -->
   <div class="container">
-    <h2 class="text-center text-primary mb-4">Perpustakaan Digital</h2>
+    <h2 class="text-center text-primary mb-4">Buku Anda</h2>
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <!-- Buku 1 -->
-      <div class="col">
-        <div class="card book-card shadow-sm h-100">
-          <img src="../img/Buku cover jdul/fiksi/Cantik itu Luka_Eka Kurniawan.jpg" class="card-img-top"
-            alt="Cantik itu Luka">
-          <div class="card-body">
-            <h5 class="card-title">Cantik itu Luka</h5>
-            <p class="card-text text-muted small">Eka Kurniawan</p>
-          </div>
-        </div>
-      </div>
+      <?php
+      
+      $id_pembaca = $_SESSION['id_pembaca'];
+      $sql = "SELECT buku.*
+              FROM sewa
+              JOIN buku ON sewa.id_buku = buku.id_buku
+              WHERE sewa.id_pembaca = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("i", $id_pembaca);
+      $stmt->execute();
+      $result = $stmt->get_result();
 
-      <!-- Buku 2 -->
-      <div class="col">
-        <div class="card book-card shadow-sm h-100">
-          <img src="../img/Buku cover jdul/fiksi/Laskar Pelangi_Andrea Hirata.jpg" class="card-img-top"
-            alt="Laskar Pelangi">
-          <div class="card-body">
-            <h5 class="card-title">Laskar Pelangi</h5>
-            <p class="card-text text-muted small">Andrea Hirata</p>
-          </div>
-        </div>
-      </div>
 
-      <!-- Buku 3 -->
-      <div class="col">
-        <div class="card book-card shadow-sm h-100">
-          <img src="../img/Buku cover jdul/fiksi/Amba_Laksmi Pamunjak.jpg" class="card-img-top" alt="Amba">
-          <div class="card-body">
-            <h5 class="card-title">Amba</h5>
-            <p class="card-text text-muted small">Laksmi Pamunjak</p>
+      while ($row = $result->fetch_assoc()) {
+        $cover = $row['cover'] ?? 'default.jpg';
+      ?>
+        <div class="col">
+          <div class="card h-100 book-card">
+            <img src="../cover/<?= htmlspecialchars($cover) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['judul']) ?>">
+            <div class="card-body">
+              <h5 class="card-title"><?= htmlspecialchars($row['judul']) ?></h5>
+              <p class="card-text"><?= htmlspecialchars($row['penulis']) ?></p>
+              <!-- Tombol detail bisa diarahkan ke halaman detail -->
+              <a href="detail.php?id=<?= $row['id_buku'] ?>" class="btn btn-primary btn-sm">Detail</a>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Buku 4 -->
-      <div class="col">
-        <div class="card book-card shadow-sm h-100">
-          <img src="../img/Buku cover jdul/fiksi/Bulan_Tere Liye.jpg" class="card-img-top" alt="Bulan">
-          <div class="card-body">
-            <h5 class="card-title">Bulan</h5>
-            <p class="card-text text-muted small">Tere Liye</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Buku 5 -->
-      <div class="col">
-        <div class="card book-card shadow-sm h-100">
-          <img src="../img/Buku cover jdul/fiksi/Hujan_Tere Liye.jpg" class="card-img-top" alt="Hujan">
-          <div class="card-body">
-            <h5 class="card-title">Hujan</h5>
-            <p class="card-text text-muted small">Tere Liye</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Buku 6 -->
-      <div class="col">
-        <div class="card book-card shadow-sm h-100">
-          <img src="../img/Buku cover jdul/fiksi/Sisi Tergelap Surga_Brian Krisna.jpg" class="card-img-top"
-            alt="Sisi Tergelap Suara">
-          <div class="card-body">
-            <h5 class="card-title">Sisi Tergelap Surga</h5>
-            <p class="card-text text-muted small">Brian Krisna</p>
-          </div>
-        </div>
-      </div>
+      <?php
+      }
+      ?>
     </div>
   </div>
 
-  <br>
-  <br>
+  <br><br>
   <!-- Footer -->
   <?php include("../modular/footerFitur.php"); ?>
 

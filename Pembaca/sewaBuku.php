@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $sql_insert_sewa = "INSERT INTO sewa (id_sewa, tgl_sewa, tgl_kembali, durasi_sewa, status_sewa, id_pembaca, id_buku) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $stmt_insert_sewa = mysqli_prepare($conn, $sql_insert_sewa);
                 // Pastikan 's' untuk id_pembaca karena char(7)
-                mysqli_stmt_bind_param($stmt_insert_sewa, "sssisis", $new_sewa_id, $tgl_sewa, $tgl_kembali, $durasi, $status_sewa, $id_pembaca_logged_in, $idBuku);
+                mysqli_stmt_bind_param($stmt_insert_sewa, "sssisss", $new_sewa_id, $tgl_sewa, $tgl_kembali, $durasi, $status_sewa, $id_pembaca_logged_in, $idBuku);
 
                 if (mysqli_stmt_execute($stmt_insert_sewa)) {
                     // Generate new id_pembayaran
