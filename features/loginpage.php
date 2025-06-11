@@ -43,6 +43,18 @@
     <div class="loginbackground"></div>
     <div class="login-container">
       <?php
+            session_start();
+            // Tampilkan notifikasi dari session jika ada
+            if (isset($_SESSION['pesan'])) {
+                echo '<div class="alert alert-'.$_SESSION['pesan_type'].' alert-notification alert-dismissible fade show" role="alert">
+                        '.$_SESSION['pesan'].'
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>';
+                unset($_SESSION['pesan']);
+                unset($_SESSION['pesan_type']);
+            }
+      ?>
+      <?php
             // PHP untuk menampilkan notifikasi login gagal
             if (isset($_GET['login_failed']) && $_GET['login_failed'] == 1) {
                 echo '<div class="error-message">Email atau password salah. Silakan coba lagi.</div>';

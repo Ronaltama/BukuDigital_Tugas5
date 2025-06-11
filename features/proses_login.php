@@ -8,6 +8,16 @@ session_start();
 // Pastikan path ini benar dan koneksi.php TIDAK menghasilkan output apapun (misalnya spasi kosong).
 include("../koneksi.php");
 
+// notifikasi status user
+if (isset($_SESSION['pesan'])) {
+    echo '<div class="alert alert-'.$_SESSION['pesan_type'].' alert-dismissible fade show" role="alert">
+        '.$_SESSION['pesan'].'
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
+    unset($_SESSION['pesan']);
+    unset($_SESSION['pesan_type']);
+}
+
 // Pastikan koneksi $conn berhasil dibuat dari koneksi.php
 if (!$conn) {
     // Log error ke file log server atau tampilkan pesan error yang aman
@@ -22,9 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $found_user_data = null; // Akan menyimpan data pengguna jika ditemukan
     $found_user_role = '';   // Akan menyimpan peran pengguna ('pembaca', 'penulis', 'operator')
+    $user_status = '';       // Akan menyimpan status pengguna ('aktif' atau 'nonaktif')
 
     // --- Coba login sebagai PEMBACA ---
-    $stmt_pembaca = $conn->prepare("SELECT id_pembaca AS id, username, email, password FROM pembaca WHERE email = ?");
+    $stmt_pembaca = $conn->prepare("SELECT id_pembaca AS id, username, email, password, status FROM pembaca WHERE email = ?");
     if ($stmt_pembaca) {
         $stmt_pembaca->bind_param("s", $email);
         $stmt_pembaca->execute();
@@ -35,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $temp_user_data['password'])) {
                 $found_user_data = $temp_user_data;
                 $found_user_role = 'pembaca';
+                $user_status = $temp_user_data['status'];
             }
         }
         $stmt_pembaca->close();
@@ -44,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // --- Jika belum ditemukan, coba login sebagai PENULIS ---
     if ($found_user_data === null) {
-        $stmt_penulis = $conn->prepare("SELECT id_penulis AS id, username, email, password, tanggal_daftar FROM penulis WHERE email = ?");
+        $stmt_penulis = $conn->prepare("SELECT id_penulis AS id, username, email, password, status FROM penulis WHERE email = ?");
         if ($stmt_penulis) {
             $stmt_penulis->bind_param("s", $email);
             $stmt_penulis->execute();
@@ -55,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (password_verify($password, $temp_user_data['password'])) {
                     $found_user_data = $temp_user_data;
                     $found_user_role = 'penulis';
+                    $user_status = $temp_user_data['status'];
                 }
             }
             $stmt_penulis->close();
@@ -65,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // --- Jika belum ditemukan, coba login sebagai OPERATOR ---
     if ($found_user_data === null) {
-        $stmt_operator = $conn->prepare("SELECT id_operator AS id, username, email, password FROM operator WHERE email = ?");
+        $stmt_operator = $conn->prepare("SELECT id_operator AS id, username, email, password, status FROM operator WHERE email = ?");
         if ($stmt_operator) {
             $stmt_operator->bind_param("s", $email);
             $stmt_operator->execute();
@@ -76,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (password_verify($password, $temp_user_data['password'])) {
                     $found_user_data = $temp_user_data;
                     $found_user_role = 'operator';
+                    $user_status = $temp_user_data['status'];
                 }
             }
             $stmt_operator->close();
@@ -88,6 +102,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // --- Verifikasi Hasil Pencarian dan Redirect ---
     if ($found_user_data !== null) {
+        // Cek status akun sebelum membuat session
+        if ($user_status == 'nonaktif') {
+            $_SESSION['pesan'] = "Akun Anda telah dinonaktifkan. Silakan hubungi administrator.";
+            $_SESSION['pesan_type'] = "danger";
+            header("Location: loginpage.php");
+            exit();
+        }
+
+        // Jika akun aktif, buat session
         $_SESSION['user_id'] = $found_user_data['id'];
         $_SESSION['username'] = $found_user_data['username'];
         $_SESSION['email'] = $found_user_data['email'];
@@ -115,11 +138,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         exit();
     } else {
-        header("Location: loginpage.php?login_failed=1");
+        header("Location: ../features/loginpage.php?login_failed=1");
         exit();
     }
 } else {
-    header("Location: loginpage.php");
+    header("Location: ../features/loginpage.php");
     exit();
 }
 ?>
