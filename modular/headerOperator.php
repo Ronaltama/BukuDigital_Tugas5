@@ -107,7 +107,10 @@
             <a class="nav-link" href="../Operator/berandaOperator.php">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../Operator/berandaOperator.php">Verifikasi Buku</a>
+            <a class="nav-link" href="../Operator/BerandaVerifikasiBuku.php">Verifikasi Buku</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Operator/BerandaVerifikasiPembayaran.php">Verifikasi Pembayaran</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="StatusUser.php">Status User</a>
@@ -127,12 +130,16 @@
       <a href="../Operator/berandaOperator.php" class="nav-link text-white">
         <i class="bi bi-house-door me-2"></i> Beranda
       </a>
-      <a href="../Operator/berandaOperator.php" class="nav-link text-white">
+      <a href="../Operator/BerandaVerifikasiBuku.php" class="nav-link text-white">
         <i class="bi bi-check-circle me-2"></i> Verifikasi Buku
+      </a>
+      <a href="../Operator/BerandaVerifikasiPembayaran.php" class="nav-link text-white">
+        <i class="bi bi-check-circle me-2"></i> Verifikasi Pembayaran
       </a>
       <a href="StatusUser.php" class="nav-link text-white">
         <i class="bi bi-check-circle-fill me-2"></i> Status User
       </a>
+      
     </div>
   </div>
 
