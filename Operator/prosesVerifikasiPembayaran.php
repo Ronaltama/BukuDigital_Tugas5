@@ -4,8 +4,7 @@ include "../koneksi.php"; // Path relatif ke file koneksi.php
 
 if (isset($_GET['id']) && isset($_GET['action'])) {
     $id_pembayaran = $_GET['id'];
-    $action = $_GET['action'];
-
+    $action = $_GET['action'];//pp
     // Tentukan status yang akan diperbarui
     $new_status = '';
     $message_status = '';
