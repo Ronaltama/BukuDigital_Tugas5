@@ -135,9 +135,71 @@ $default_icon = 'fas fa-book';
   <br>
   <br>
 
-  <?php include("modular/footerFitur.php"); ?>
+  <br>
+  <br>
+  <br> <br> <br> <br> <br> <br> <br>
+
+  <?php include("modular/footer.php"); ?>
 
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+  // JavaScript untuk fungsionalitas scroll horizontal
+  document.addEventListener('DOMContentLoaded', function() {
+    function setupScroll(containerId, leftBtnClass, rightBtnClass) {
+      const scrollContainer = document.getElementById(containerId);
+      const leftBtn = document.querySelector(`.${leftBtnClass}`);
+      const rightBtn = document.querySelector(`.${rightBtnClass}`);
+
+      if (scrollContainer && leftBtn && rightBtn) {
+        leftBtn.addEventListener('click', () => {
+          scrollContainer.scrollBy({
+            left: -220, // Lebar card + gap
+            behavior: 'smooth'
+          });
+        });
+
+        rightBtn.addEventListener('click', () => {
+          scrollContainer.scrollBy({
+            left: 220, // Lebar card + gap
+            behavior: 'smooth'
+          });
+        });
+
+        // Sembunyikan/tampilkan tombol scroll berdasarkan posisi scroll
+        const toggleScrollButtons = () => {
+          if (scrollContainer.scrollWidth > scrollContainer.clientWidth) {
+            if (scrollContainer.scrollLeft === 0) {
+              leftBtn.style.display = 'none';
+              rightBtn.style.display = 'flex'; // Tampilkan tombol kanan
+            } else if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth) {
+              rightBtn.style.display = 'none';
+              leftBtn.style.display = 'flex'; // Tampilkan tombol kiri
+            } else {
+              leftBtn.style.display = 'flex';
+              rightBtn.style.display = 'flex';
+            }
+          } else {
+            leftBtn.style.display = 'none';
+            rightBtn.style.display = 'none';
+          }
+        };
+
+        scrollContainer.addEventListener('scroll', toggleScrollButtons);
+        // Panggil saat halaman dimuat untuk mengatur tampilan awal tombol
+        toggleScrollButtons();
+        // Juga panggil jika ada perubahan ukuran window (misal: resize)
+        window.addEventListener('resize', toggleScrollButtons);
+      }
+    }
+
+    setupScroll('new-releases-books', 'new-releases-scroll-left', 'new-releases-scroll-right');
+    setupScroll('popular-books', 'popular-scroll-left', 'popular-scroll-right');
+    setupScroll('cheapest-books', 'cheapest-scroll-left', 'cheapest-scroll-right');
+    setupScroll('most-expensive-books', 'most-expensive-scroll-left', 'most-expensive-scroll-right');
+    setupScroll('recommendation-books', 'recommendation-scroll-left', 'recommendation-scroll-right');
+  });
+  </script>
 </body>
 
 </html>

@@ -119,32 +119,7 @@ if (isset($_GET['stream']) && $_GET['stream'] === 'true') {
   .viewer-container {
     flex-grow: 1;
     border: none;
-  }
-
-  /* Wrapper sekarang menjadi item yang mengisi ruang */
-  .viewer-wrapper {
-    position: relative;
-    flex-grow: 1;
-  }
-
-  /* iframe (viewer-container) harus mengisi 100% dari wrapper-nya */
-  .viewer-container {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  /* Overlay untuk membantu menonaktifkan klik kanan */
-  .viewer-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: transparent;
-    pointer-events: none;
-    /* <-- TAMBAHKAN BARIS INI */
+    /* Menghilangkan border pada iframe */
   }
   </style>
 </head>
@@ -163,14 +138,11 @@ if (isset($_GET['stream']) && $_GET['stream'] === 'true') {
       </div>
     </header>
 
-    <div class="viewer-wrapper" oncontextmenu="return false;">
-      <iframe class="viewer-container" src="?id=<?php echo htmlspecialchars($id_buku); ?>&stream=true#toolbar=0"
-        title="PDF Viewer untuk <?php echo htmlspecialchars($buku['judul']); ?>">
-        Browser Anda tidak mendukung tampilan PDF secara langsung.
-      </iframe>
-      <div class="viewer-overlay"></div>
-    </div>
-
+    <iframe class="viewer-container" src="<?php echo htmlspecialchars($file_path); ?>"
+      title="PDF Viewer untuk <?php echo htmlspecialchars($buku['judul']); ?>">
+      Browser Anda tidak mendukung iframe, silakan unduh PDF <a href="<?php echo htmlspecialchars($file_path); ?>">di
+        sini</a>.
+    </iframe>
   </div>
 
   <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>

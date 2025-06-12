@@ -103,7 +103,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="../Penulis/berandaPenulis.php">Beranda</a>
+            <a class="nav-link" href="berandaPenulis.php">Beranda</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="UnggahBuku.php">Unggah Buku</a>
@@ -123,7 +123,7 @@
       <button type="button" class="btn-close btn-close-white" id="close-sidebar" aria-label="Close"></button>
     </div>
     <div class="nav flex-column mt-3">
-      <a href="../Penulis/berandaPenulis.php" class="nav-link text-white">
+      <a href="berandaPenulis.php" class="nav-link text-white">
         <i class="bi bi-house-door me-2"></i> Beranda
       </a>
       <a href="UnggahBuku.php" class="nav-link text-white">

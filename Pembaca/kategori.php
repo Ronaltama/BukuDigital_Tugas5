@@ -132,10 +132,12 @@ $default_icon = 'fas fa-book';
     </div>
   </div>
 
-  <br>
-  <br>
-
+  <br><br><br><br><br> <br><br>
   <?php include("../modular/footerFitur.php"); ?>
+
+
+
+
 
   <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
