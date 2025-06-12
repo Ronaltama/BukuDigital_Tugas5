@@ -137,8 +137,9 @@ error_reporting(E_ALL);
             // SQL query untuk mengambil pembayaran dengan status 'pending'
             // Menggunakan `status_pembayaran` sesuai struktur DB Anda
             // Tidak menyertakan `p.bukti` karena kolom tersebut tidak ada di DB
-            $sql = "SELECT
+    $sqlPayments = "SELECT
                         p.id_pembayaran,
+                        dp.id_pemesanan, -- Ambil id_pemesanan untuk tombol aksi
                         p.jumlah,
                         p.tgl_pembayaran,
                         p.status_pembayaran,
@@ -146,9 +147,9 @@ error_reporting(E_ALL);
                     FROM
                         pembayaran p
                     JOIN
-                        sewa s ON p.id_sewa = s.id_sewa
+                        detail_pesanan dp ON p.id_pemesanan = dp.id_pemesanan
                     JOIN
-                        pembaca pb ON s.id_pembaca = pb.id_pembaca
+                        pembaca pb ON dp.id_pembaca = pb.id_pembaca
                     WHERE
                         p.status_pembayaran = 'pending'
                     ORDER BY
@@ -180,12 +181,13 @@ error_reporting(E_ALL);
                     echo '<td data-label="Jumlah">Rp ' . number_format($row["jumlah"], 0, ',', '.') . '</td>';
                     echo '<td data-label="Tanggal Pembayaran">' . htmlspecialchars($row["tgl_pembayaran"]) . '</td>';
                     echo '<td data-label="Status">' . htmlspecialchars(ucfirst($row['status_pembayaran'])) . '</td>';
-                    echo '<td data-label="Aksi">';
-                    // Tombol Verifikasi dan Tolak
-                    // Mengarah ke prosesVerifikasiPembayaran.php
-                    echo '<a href="prosesVerifikasiPembayaran.php?id=' . htmlspecialchars($row["id_pembayaran"]) . '&action=verify" class="button verifikasi">Verifikasi</a>';
-                    echo '<a href="prosesVerifikasiPembayaran.php?id=' . htmlspecialchars($row["id_pembayaran"]) . '&action=reject" class="button tolak">Tolak</a>';
-                    echo '</td>';
+  echo "<td data-label='Aksi'>";
+echo "  <form action='konfirmasi_pembayaran.php' method='POST' style='display:inline-block;'>";
+echo "    <input type='hidden' name='id_pemesanan' value='" . htmlspecialchars($rowPayment["id_pemesanan"]) . "'>";
+echo "    <button type='submit' name='action' value='verify' class='button verifikasi' onclick=\"return confirm('Anda yakin ingin VERIFIKASI pesanan #" . htmlspecialchars($rowPayment["id_pemesanan"]) . "?');\">Verifikasi</button>";
+echo "    <button type='submit' name='action' value='reject' class='button tolak' onclick=\"return confirm('Anda yakin ingin MENOLAK pesanan #" . htmlspecialchars($rowPayment["id_pemesanan"]) . "?');\">Tolak</button>";
+echo "  </form>";
+echo "</td>";
                     echo '</tr>';
                 }
                 echo '</tbody>';

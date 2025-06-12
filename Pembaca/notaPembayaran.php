@@ -2,23 +2,22 @@
 session_start();
 
 // Ambil id_pembaca dari session untuk ditampilkan di nota
-$id_pembaca_logged_in = $_SESSION['id_pembaca'] ?? 'Tidak Diketahui'; // Ambil dari session atau fallback
+$id_pembaca_logged_in = $_SESSION['id_pembaca'] ?? 'Tidak Diketahui'; 
 
 if (!isset($_SESSION['transaction_details'])) {
-    header("Location: sewaBuku.php");
+    header("Location: BerandaPembaca.php");
     exit();
 }
 
 $details = $_SESSION['transaction_details'];
 unset($_SESSION['transaction_details']);
 
-$qr_data = "ID Transaksi: " . $details['id_sewa'] . "\n";
+// Data QR Code sekarang berdasarkan id_pemesanan
+$qr_data = "ID Pesanan: " . $details['id_pemesanan'] . "\n";
 $qr_data .= "Total Bayar: Rp" . number_format($details['total_bayar'], 0, ',', '.') . "\n";
-$qr_data .= "Metode: " . $details['metode_pembayaran'] . "\n";
-$qr_data .= "Tanggal: " . $details['tgl_sewa'];
+$qr_data .= "Metode: " . $details['metode_pembayaran'];
 
 $qr_code_url = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=" . urlencode($qr_data);
-
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -149,11 +148,10 @@ $qr_code_url = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=" . ur
                 <td class="title">
                   Digital Book
                 </td>
-                <td>
-                  Nota #<?= htmlspecialchars($details['id_sewa']) ?><br>
-                  Tanggal Sewa: <?= date('d F Y', strtotime($details['tgl_sewa'])) ?><br>
-                  Tanggal Kembali: <?= date('d F Y', strtotime($details['tgl_kembali'])) ?>
-                </td>
+<td>
+  Nota Pesanan #<?= htmlspecialchars($details['id_pemesanan']) ?><br>
+  Tanggal Pesan: <?= date('d F Y', strtotime($details['tgl_pesan'])) ?><br>
+</td>
               </tr>
             </table>
           </td>

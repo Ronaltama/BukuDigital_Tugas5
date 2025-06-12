@@ -1,21 +1,15 @@
 <?php
-session_start(); // Pastikan ini di baris paling atas
+session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
-
 include '../koneksi.php';
 
-// Ambil id_pembaca dari session
-if (!isset($_SESSION['id_pembaca']) || empty($_SESSION['id_pembaca'])) { // Tambahkan empty() check
-    error_log("Pengguna belum login atau session id_pembaca kosong. Redirect ke login."); // Debugging
-    header("Location: ../loginpage.php"); // Pastikan ini mengarah ke halaman login Anda
+if (!isset($_SESSION['id_pembaca']) || empty($_SESSION['id_pembaca'])) {
+    header("Location: ../loginpage.php");
     exit;
 }
 $id_pembaca_logged_in = $_SESSION['id_pembaca'];
-error_log("sewaBuku.php - id_pembaca yang digunakan: " . $id_pembaca_logged_in); // Debugging
-
 $buku = null;
 $idBuku = $_GET['id'] ?? '';
 
@@ -26,48 +20,16 @@ if ($idBuku) {
     mysqli_stmt_execute($stmt_buku);
     $result_buku = mysqli_stmt_get_result($stmt_buku);
     $buku = mysqli_fetch_assoc($result_buku);
-
-    if (!$buku) {
-        echo "<div class='container mt-5'><div class='alert alert-danger'>Buku tidak ditemukan.</div></div>";
-        exit;
-    }
+    if (!$buku) { die("Buku tidak ditemukan."); }
 } else {
-    echo "<div class='container mt-5'><div class='alert alert-danger'>ID Buku tidak ditemukan.</div></div>";
-    exit;
+    die("ID Buku tidak ditemukan.");
 }
 
-// AMBIL HARGA SEWA BULANAN DARI DATABASE
 $harga_sewa_bulanan_dari_db = $buku['harga_sewa'];
-
-// Definisikan harga paket berdasarkan harga bulanan dari DB
-// Anda bisa menyesuaikan persentase atau nilai tetap di sini
-$packagePrices = [
-    3 => $harga_sewa_bulanan_dari_db * 0.20,   // Misal 20% dari harga bulanan untuk 3 hari
-    7 => $harga_sewa_bulanan_dari_db * 0.35,   // Misal 35% dari harga bulanan untuk 7 hari
-    14 => $harga_sewa_bulanan_dari_db * 0.60,  // Misal 60% dari harga bulanan untuk 14 hari
-    30 => $harga_sewa_bulanan_dari_db * 1.00,  // 100% dari harga bulanan untuk 30 hari
-];
-
-// Diskon berdasarkan paket sewa (durasi) - ini tetap berlaku setelah harga paket ditentukan
-$durationDiscounts = [
-    3 => 0,      // 3 hari -> 0% diskon
-    7 => 0.05,   // 7 hari -> 5%
-    14 => 0.1,   // 14 hari -> 10%
-    30 => 0.15,  // 30 hari -> 15%
-];
-
-// Biaya admin
-$adminFees = [
-    "transfer" => 2000,
-    "ewallet" => 2500,
-];
-
-// Diskon voucher
-$voucherDiscounts = [
-    "DIGI20" => 0.2,
-    "GEMARMEMBACA" => 0.1,
-];
-
+$packagePrices = [ 3 => $harga_sewa_bulanan_dari_db * 0.20, 7 => $harga_sewa_bulanan_dari_db * 0.35, 14 => $harga_sewa_bulanan_dari_db * 0.60, 30 => $harga_sewa_bulanan_dari_db * 1.00, ];
+$durationDiscounts = [ 3 => 0, 7 => 0.05, 14 => 0.1, 30 => 0.15, ];
+$adminFees = [ "transfer" => 2000, "ewallet" => 2500, ];
+$voucherDiscounts = [ "DIGI20" => 0.2, "GEMARMEMBACA" => 0.1, ];
 $result_calculation = null;
 $transaction_status = null;
 $action = $_POST['action'] ?? '';
@@ -76,126 +38,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $durasi = (int)$_POST['durasi'];
     $voucher = strtoupper(trim($_POST['voucher']));
     $metodePembayaran = $_POST['metode_pembayaran'];
-
-    // Subtotal sewa diambil langsung dari harga paket yang telah ditentukan
     $subtotal_sewa = isset($packagePrices[$durasi]) ? $packagePrices[$durasi] : 0;
-    // Jika durasi yang dipilih tidak ada di packagePrices, $subtotal_sewa akan 0.
-    // Anda bisa menambahkan validasi di sini jika durasi tidak valid.
-
     $diskonDurasi = isset($durationDiscounts[$durasi]) ? $subtotal_sewa * $durationDiscounts[$durasi] : 0;
-
     $diskonVoucher = 0;
-    if (isset($voucherDiscounts[$voucher])) {
-        $diskonVoucher = $subtotal_sewa * $voucherDiscounts[$voucher];
-    } else if (!empty($voucher)) {
-        $transaction_status = "<div class='alert alert-warning'>Kode voucher tidak valid.</div>";
-    }
-
+    if (isset($voucherDiscounts[$voucher])) { $diskonVoucher = $subtotal_sewa * $voucherDiscounts[$voucher]; } else if (!empty($voucher)) { $transaction_status = "<div class='alert alert-warning'>Kode voucher tidak valid.</div>"; }
     $adminFee = isset($adminFees[$metodePembayaran]) ? $adminFees[$metodePembayaran] : 0;
-
     $total_bayar = $subtotal_sewa - $diskonDurasi - $diskonVoucher + $adminFee;
-
-    $result_calculation = [
-        'durasi' => $durasi,
-        'judul_buku' => $buku['judul'],
-        'harga_per_hari_base' => $buku['harga_sewa'], // Ini adalah harga bulanan dari DB
-        'harga_paket_dasar' => $subtotal_sewa, // Ini adalah harga paket sebelum diskon/biaya
-        'subtotal_sewa' => $subtotal_sewa,
-        'diskon_durasi' => $diskonDurasi,
-        'diskon_voucher' => $diskonVoucher,
-        'admin_fee' => $adminFee,
-        'total_bayar' => $total_bayar,
-        'metode_pembayaran' => $metodePembayaran
-    ];
-
+    
+    // Variabel ini akan digunakan oleh HTML asli Anda untuk menampilkan hasil kalkulasi
+    $result_calculation = [ 'durasi' => $durasi, 'judul_buku' => $buku['judul'], 'harga_per_hari_base' => $buku['harga_sewa'], 'harga_paket_dasar' => $subtotal_sewa, 'subtotal_sewa' => $subtotal_sewa, 'diskon_durasi' => $diskonDurasi, 'diskon_voucher' => $diskonVoucher, 'admin_fee' => $adminFee, 'total_bayar' => $total_bayar, 'metode_pembayaran' => $metodePembayaran ];
+    
     if ($action === 'rent') {
-        // --- Database Insertion ---
-        // Pastikan id_pembaca_logged_in tidak kosong sebelum mencoba insert
         if (empty($id_pembaca_logged_in)) {
             $transaction_status = "<div class='alert alert-danger'>ID Pembaca tidak valid. Silakan login ulang.</div>";
-            error_log("Error: id_pembaca_logged_in kosong saat mencoba insert sewa!"); // Debugging
         } else {
-            // Generate new id_sewa
-            $sql_max_sewa_id = "SELECT MAX(id_sewa) AS max_id FROM sewa";
-            $result_max_sewa_id = $conn->query($sql_max_sewa_id);
+            mysqli_begin_transaction($conn);
+            try {
+                $sql_max_pesanan_id = "SELECT MAX(id_pemesanan) AS max_id FROM detail_pesanan";
+                $result_max_pesanan_id = $conn->query($sql_max_pesanan_id);
+                $row_max_pesanan_id = $result_max_pesanan_id->fetch_assoc();
+                $last_pemesanan_id_num = $row_max_pesanan_id['max_id'] ? (int)substr($row_max_pesanan_id['max_id'], 2) : 0;
+                $new_pemesanan_id = 'DP' . str_pad($last_pemesanan_id_num + 1, 6, '0', STR_PAD_LEFT);
+                $tanggal_pesanan = date('Y-m-d');
+                $status_pemesanan = 'menunggu';
 
-            if ($result_max_sewa_id === false) {
-                $transaction_status = "<div class='alert alert-danger'>Error getting max sewa ID: " . $conn->error . "</div>";
-            } else {
-                $row_max_sewa_id = $result_max_sewa_id->fetch_assoc();
-                $last_sewa_id = $row_max_sewa_id['max_id'];
-                $new_sewa_id_num = 1;
-                if ($last_sewa_id !== null && preg_match('/^\d{8}$/', $last_sewa_id)) { // Regex lebih ketat untuk 8 digit
-                    $new_sewa_id_num = (int)$last_sewa_id + 1; // Jika murni angka, langsung konversi
-                }
-                $new_sewa_id = str_pad($new_sewa_id_num, 8, '0', STR_PAD_LEFT);
+                $sql_insert_pesanan = "INSERT INTO detail_pesanan (id_pemesanan, id_pembaca, id_buku, durasi_sewa, total_harga, status_pemesanan, tanggal_pesanan) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $stmt_pesanan = mysqli_prepare($conn, $sql_insert_pesanan);
+                mysqli_stmt_bind_param($stmt_pesanan, "sssidss", $new_pemesanan_id, $id_pembaca_logged_in, $idBuku, $durasi, $total_bayar, $status_pemesanan, $tanggal_pesanan);
+                mysqli_stmt_execute($stmt_pesanan);
 
-                $tgl_sewa = date('Y-m-d');
-                $tgl_kembali = date('Y-m-d', strtotime("+$durasi days"));
-                $status_sewa = 'dipinjam';
+                $sql_max_pembayaran_id = "SELECT MAX(CAST(id_pembayaran AS UNSIGNED)) AS max_id FROM pembayaran";
+                $result_max_pembayaran_id = $conn->query($sql_max_pembayaran_id);
+                $row_max_pembayaran_id = $result_max_pembayaran_id->fetch_assoc();
+                $new_pembayaran_id = ($row_max_pembayaran_id['max_id'] ?? 0) + 1;
+                $status_pembayaran = 'pending';
 
-                $sql_insert_sewa = "INSERT INTO sewa (id_sewa, tgl_sewa, tgl_kembali, durasi_sewa, status_sewa, id_pembaca, id_buku) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                $stmt_insert_sewa = mysqli_prepare($conn, $sql_insert_sewa);
-                // Pastikan 's' untuk id_pembaca karena char(7)
-                mysqli_stmt_bind_param($stmt_insert_sewa, "sssisss", $new_sewa_id, $tgl_sewa, $tgl_kembali, $durasi, $status_sewa, $id_pembaca_logged_in, $idBuku);
+                // Kolom di pembayaran harus id_pemesanan, bukan id_sewa
+                $sql_insert_pembayaran = "INSERT INTO pembayaran (id_pembayaran, id_pemesanan, jumlah, tgl_pembayaran, status_pembayaran) VALUES (?, ?, ?, ?, ?)";
+                $stmt_pembayaran = mysqli_prepare($conn, $sql_insert_pembayaran);
+                mysqli_stmt_bind_param($stmt_pembayaran, "ssdss", $new_pembayaran_id, $new_pemesanan_id, $total_bayar, $tanggal_pesanan, $status_pembayaran);
+                mysqli_stmt_execute($stmt_pembayaran);
 
-                if (mysqli_stmt_execute($stmt_insert_sewa)) {
-                    // Generate new id_pembayaran
-                    $sql_max_pembayaran_id = "SELECT MAX(CAST(id_pembayaran AS UNSIGNED)) AS max_id FROM pembayaran";
-                    $result_max_pembayaran_id = $conn->query($sql_max_pembayaran_id);
+                mysqli_commit($conn);
+                
+                // Variabel session ini diisi sesuai kebutuhan HTML asli di notaPembayaran.php
+                $_SESSION['transaction_details'] = [
+                    'id_pemesanan' => $new_pemesanan_id, // Ganti id_sewa jadi id_pemesanan
+                    'judul_buku' => $buku['judul'],
+                    'durasi' => $durasi,
+                    'tgl_pesan' => $tanggal_pesanan, // Ganti tgl_sewa jadi tgl_pesan
+                    'total_bayar' => $total_bayar,
+                    'metode_pembayaran' => $metodePembayaran,
+                    'status_pembayaran' => $status_pembayaran,
+                    'harga_per_hari_base' => $buku['harga_sewa'], // Ini untuk mencocokkan nota lama
+                    'harga_paket_dasar' => $subtotal_sewa // Ini untuk mencocokkan nota lama
+                ];
+                header("Location: notaPembayaran.php");
+                exit();
 
-                    if ($result_max_pembayaran_id === false) {
-                        $transaction_status = "<div class='alert alert-danger'>Error getting max pembayaran ID: " . $conn->error . "</div>";
-                        $sql_delete_sewa = "DELETE FROM sewa WHERE id_sewa = ?";
-                        $stmt_delete_sewa = mysqli_prepare($conn, $sql_delete_sewa);
-                        mysqli_stmt_bind_param($stmt_delete_sewa, "s", $new_sewa_id);
-                        mysqli_stmt_execute($stmt_delete_sewa);
-                    } else {
-                        $row_max_pembayaran_id = $result_max_pembayaran_id->fetch_assoc();
-                        $last_pembayaran_id = $row_max_pembayaran_id['max_id'];
-                        $new_pembayaran_id = $last_pembayaran_id ? (int)$last_pembayaran_id + 1 : 1;
-
-                        $tgl_pembayaran = date('Y-m-d');
-                        $status_pembayaran = 'pending';
-
-                        $sql_insert_pembayaran = "INSERT INTO pembayaran (id_pembayaran, jumlah, tgl_pembayaran, status_pembayaran, id_sewa) VALUES (?, ?, ?, ?, ?)";
-                        $stmt_insert_pembayaran = mysqli_prepare($conn, $sql_insert_pembayaran);
-                        mysqli_stmt_bind_param($stmt_insert_pembayaran, "sdsss", $new_pembayaran_id, $total_bayar, $tgl_pembayaran, $status_pembayaran, $new_sewa_id);
-
-                        if (mysqli_stmt_execute($stmt_insert_pembayaran)) {
-                            // Redirect to nota page with transaction details
-                            $_SESSION['transaction_details'] = [
-                                'id_sewa' => $new_sewa_id,
-                                'id_buku' => $idBuku,
-                                'judul_buku' => $buku['judul'],
-                                'harga_per_hari_base' => $buku['harga_sewa'], // Harga bulanan dari DB
-                                'harga_paket_dasar' => $subtotal_sewa, // Harga paket sebelum diskon
-                                'durasi' => $durasi,
-                                'tgl_sewa' => $tgl_sewa,
-                                'tgl_kembali' => $tgl_kembali,
-                                'metode_pembayaran' => $metodePembayaran,
-                                'total_bayar' => $total_bayar,
-                                'id_pembayaran' => $new_pembayaran_id,
-                                'status_pembayaran' => $status_pembayaran
-                            ];
-                            header("Location: notaPembayaran.php");
-                            exit();
-                        } else {
-                            $transaction_status = "<div class='alert alert-danger'>Gagal menyimpan data pembayaran: " . mysqli_error($conn) . "</div>";
-                            $sql_delete_sewa = "DELETE FROM sewa WHERE id_sewa = ?";
-                            $stmt_delete_sewa = mysqli_prepare($conn, $sql_delete_sewa);
-                            mysqli_stmt_bind_param($stmt_delete_sewa, "s", $new_sewa_id);
-                            mysqli_stmt_execute($stmt_delete_sewa);
-                        }
-                    }
-                } else {
-                    $transaction_status = "<div class='alert alert-danger'>Gagal menyimpan data sewa: " . mysqli_error($conn) . "</div>";
-                }
+            } catch (mysqli_sql_exception $exception) {
+                mysqli_rollback($conn);
+                $transaction_status = "<div class='alert alert-danger'>Gagal memproses pesanan: " . $exception->getMessage() . "</div>";
             }
         }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">

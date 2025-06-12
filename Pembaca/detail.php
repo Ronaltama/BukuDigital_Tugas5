@@ -35,7 +35,7 @@ if (!$id_pembaca) {
 $sewa_aktif = null; // Variabel untuk menyimpan data sewa jika valid
 
 $sql_cek_akses = "SELECT tgl_kembali FROM sewa 
-                  WHERE id_pembaca = ? AND id_buku = ? AND status_sewa = 'dipinjam' 
+                  WHERE id_pembaca = ? AND id_buku = ? AND status_sewa = 'dipinjam' AND tgl_kembali >= CURDATE()
                   LIMIT 1";
 
 $stmt_cek = $conn->prepare($sql_cek_akses);

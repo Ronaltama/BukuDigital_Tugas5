@@ -503,51 +503,66 @@ if (isset($_GET['book_id']) && isset($_GET['book_action'])) {
                 <th>Aksi</th>
             </tr>
 
-            <?php
-            if ($conn) {
-                // SQL query to fetch payments with 'pending' status, joining 'sewa' and 'pembaca' tables
-                $sqlPayments = "SELECT
-                                        p.id_pembayaran,
-                                        p.jumlah,
-                                        p.tgl_pembayaran,
-                                        p.status_pembayaran,
-                                        pb.username AS nama_pengguna
-                                    FROM
-                                        pembayaran p
-                                    JOIN
-                                        sewa s ON p.id_sewa = s.id_sewa
-                                    JOIN
-                                        pembaca pb ON s.id_pembaca = pb.id_pembaca
-                                    WHERE
-                                        p.status_pembayaran = 'pending'
-                                    ORDER BY
-                                        p.tgl_pembayaran ASC";
-                $resultPayments = $conn->query($sqlPayments);
+           <?php
+// Periksa koneksi
+if ($conn) {
+    // Kueri SQL yang BENAR untuk mengambil data pembayaran pending
+    $sqlPayments = "SELECT
+                        p.id_pembayaran,
+                        dp.id_pemesanan, -- Ambil id_pemesanan untuk tombol aksi
+                        p.jumlah,
+                        p.tgl_pembayaran,
+                        p.status_pembayaran,
+                        pb.username AS nama_pengguna
+                    FROM
+                        pembayaran p
+                    JOIN
+                        detail_pesanan dp ON p.id_pemesanan = dp.id_pemesanan
+                    JOIN
+                        pembaca pb ON dp.id_pembaca = pb.id_pembaca
+                    WHERE
+                        p.status_pembayaran = 'pending'
+                    ORDER BY
+                        p.tgl_pembayaran ASC";
 
-                if (!$resultPayments) {
-                    echo "<tr><td colspan='6'>Error kueri: " . $conn->error . "</td></tr>";
-                } elseif ($resultPayments->num_rows > 0) {
-                    while ($rowPayment = $resultPayments->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td data-label='ID Pembayaran'>" . htmlspecialchars($rowPayment["id_pembayaran"]) . "</td>";
-                        echo "<td data-label='Pengguna'>" . htmlspecialchars($rowPayment["nama_pengguna"]) . "</td>";
-                        echo "<td data-label='Jumlah'>Rp " . number_format($rowPayment["jumlah"], 0, ',', '.') . "</td>";
-                        echo "<td data-label='Tanggal'>" . htmlspecialchars($rowPayment["tgl_pembayaran"]) . "</td>";
-                        echo "<td data-label='Status'>" . htmlspecialchars(ucfirst($rowPayment["status_pembayaran"])) . "</td>";
-                        echo "<td data-label='Aksi'>";
-                        // Changed href to use 'payment_id' and 'payment_action' to differentiate from user actions
-                        echo "<a href='?payment_id=" . htmlspecialchars($rowPayment["id_pembayaran"]) . "&payment_action=verify' class='button verifikasi' onclick=\"return confirm('Apakah Anda yakin ingin memverifikasi pembayaran ini?');\">Verifikasi</a>";
-                        echo "<a href='?payment_id=" . htmlspecialchars($rowPayment["id_pembayaran"]) . "&payment_action=reject' class='button tolak' onclick=\"return confirm('Apakah Anda yakin ingin menolak pembayaran ini?');\">Tolak</a>";
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='6'>Tidak ada pembayaran yang menunggu verifikasi saat ini.</td></tr>";
-                }
-            } else {
-                echo "<tr><td colspan='6'>Koneksi database gagal.</td></tr>";
+    $resultPayments = $conn->query($sqlPayments);
+
+    // STRUKTUR LOGIKA YANG DIPERBAIKI:
+    // Pertama, cek apakah kueri itu sendiri gagal.
+    if ($resultPayments === false) {
+        echo "<tr><td colspan='6'>Error dalam menjalankan kueri: " . htmlspecialchars($conn->error) . "</td></tr>";
+    } else {
+        // Jika kueri berhasil, baru kita cek apakah ada isinya.
+        if ($resultPayments->num_rows > 0) {
+            while ($rowPayment = $resultPayments->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td data-label='ID Pembayaran'>" . htmlspecialchars($rowPayment["id_pembayaran"]) . "</td>";
+                echo "<td data-label='Pengguna'>" . htmlspecialchars($rowPayment["nama_pengguna"]) . "</td>";
+                echo "<td data-label='Jumlah'>Rp " . number_format($rowPayment["jumlah"], 0, ',', '.') . "</td>";
+                echo "<td data-label='Tanggal'>" . htmlspecialchars($rowPayment["tgl_pembayaran"]) . "</td>";
+                echo "<td data-label='Status'>" . htmlspecialchars(ucfirst($rowPayment["status_pembayaran"])) . "</td>";
+                
+                // Tombol Aksi yang BENAR dengan metode POST
+echo "<td data-label='Aksi'>";
+echo "  <form action='konfirmasi_pembayaran.php' method='POST' style='display:inline-block;'>";
+echo "    <input type='hidden' name='id_pemesanan' value='" . htmlspecialchars($rowPayment["id_pemesanan"]) . "'>";
+echo "    <button type='submit' name='action' value='verify' class='button verifikasi' onclick=\"return confirm('Anda yakin ingin VERIFIKASI pesanan #" . htmlspecialchars($rowPayment["id_pemesanan"]) . "?');\">Verifikasi</button>";
+echo "    <button type='submit' name='action' value='reject' class='button tolak' onclick=\"return confirm('Anda yakin ingin MENOLAK pesanan #" . htmlspecialchars($rowPayment["id_pemesanan"]) . "?');\">Tolak</button>";
+echo "  </form>";
+echo "</td>";
+
+                echo "</tr>";
             }
-            ?>
+        } else {
+            // Jika kueri berhasil tapi tidak ada data
+            echo "<tr><td colspan='6'>Tidak ada pembayaran yang menunggu verifikasi saat ini.</td></tr>";
+        }
+    }
+} else {
+    // Jika koneksi ke database gagal dari awal
+    echo "<tr><td colspan='6'>Koneksi database gagal.</td></tr>";
+}
+?>
         </table>
 
         <h3>Daftar Buku Menunggu Verifikasi</h3>
