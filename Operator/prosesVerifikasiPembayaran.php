@@ -49,17 +49,17 @@ if (isset($_GET['id']) && isset($_GET['action'])) {
                     }
                 }
 
-                echo "<script>alert('Status pembayaran berhasil diperbarui menjadi " . $message_status . ".'); window.location.href='verifikasipemayaran.php';</script>";
+                echo "<script>alert('Status pembayaran berhasil diperbarui menjadi " . $message_status . ".'); window.location.href='BerandaVerifikasiPembayaran.php';</script>";
             } else {
-                echo "<script>alert('Gagal memperbarui status pembayaran: " . $stmt->error . "'); window.location.href='verifikasipemayaran.php';</script>";
+                echo "<script>alert('Gagal memperbarui status pembayaran: " . $stmt->error . "'); window.location.href='BerandaVerifikasiPembayaran.php';</script>";
             }
             $stmt->close();
         } else {
-            echo "<script>alert('Error preparing statement: " . $conn->error . "'); window.location.href='verifikasipemayaran.php';</script>";
+            echo "<script>alert('Error preparing statement: " . $conn->error . "'); window.location.href='BerandaVerifikasiPembayaran.php';</script>";
         }
     }
 } else {
-    echo "<script>alert('Parameter tidak lengkap.'); window.location.href='verifikasipemayaran.php';</script>";
+    echo "<script>alert('Parameter tidak lengkap.'); window.location.href='../Operator/BerandaVerifikasiPembayaran.php';</script>";
 }
 
 $conn->close();

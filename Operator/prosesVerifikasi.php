@@ -16,9 +16,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $stmt->bind_param("ss", $operator_id, $id_buku); // 'ss' means two string parameters
 
     if ($stmt->execute()) {
-        echo "<script>alert('Buku berhasil diverifikasi!'); window.location.href='berandaOperator.php';</script>";
+        echo "<script>alert('Buku berhasil diverifikasi!'); window.location.href='BerandaVerifikasiBuku.php';</script>";
     } else {
-        echo "<script>alert('Error: " . $stmt->error . "'); window.location.href='berandaOperator.php';</script>";
+        echo "<script>alert('Error: " . $stmt->error . "'); window.location.href='BerandaVerifikasiBuku.php';</script>";
     }
 
     $stmt->close();
