@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 include("../koneksi.php");
 
 // -----------------------------------------------------------------------------
-// TAHAP 1: VALIDASI INPUT DAN PENGGUNA (Sama seperti detail.php)
+// TAHAP 1: VALIDASI INPUT DAN PENGGUNA (Tidak berubah)
 // -----------------------------------------------------------------------------
 
 $id_buku = $_GET['id'] ?? null;
@@ -22,14 +22,14 @@ if (!$id_pembaca) {
 }
 
 // -----------------------------------------------------------------------------
-// TAHAP 2: VERIFIKASI HAK AKSES SEWA (WAJIB ADA!)
+// TAHAP 2: VERIFIKASI HAK AKSES SEWA (Tidak berubah)
 // -----------------------------------------------------------------------------
 
 // Query untuk memastikan pengguna punya sewa AKTIF untuk buku ini
 $sql_cek_akses = "SELECT id_sewa FROM sewa 
-                  WHERE id_pembaca = ? AND id_buku = ? AND status_sewa = 'dipinjam' 
+                  WHERE id_pembaca = ? AND id_buku = ? AND status_sewa = 'dipinjam' AND tgl_kembali >= CURDATE()
                   LIMIT 1";
-
+                  
 $stmt_cek = $conn->prepare($sql_cek_akses);
 $stmt_cek->bind_param("ss", $id_pembaca, $id_buku);
 $stmt_cek->execute();
@@ -38,12 +38,12 @@ $result_cek = $stmt_cek->get_result();
 if ($result_cek->num_rows === 0) {
     // Jika tidak ada hasil, sewa sudah berakhir atau tidak sah. Tolak akses.
     http_response_code(403); // Forbidden
-    die("<h2>Akses Ditolak</h2><p>Masa sewa Anda untuk buku ini telah berakhir. Anda tidak diizinkan mengakses halaman ini.</p><a href='perpus.php'>Kembali ke Daftar Buku Sewaan</a>");
+    die("<h2>Akses Ditolak</h2><p>Masa sewa Anda untuk buku ini telah berakhir atau Anda tidak memiliki hak akses. Anda tidak diizinkan mengakses konten ini.</p><a href='perpus.php'>Kembali ke Daftar Buku Sewaan</a>");
 }
 $stmt_cek->close();
 
 // -----------------------------------------------------------------------------
-// TAHAP 3: AMBIL INFORMASI BUKU (JUDUL DAN NAMA FILE)
+// TAHAP 3: AMBIL INFORMASI BUKU (Tidak berubah)
 // -----------------------------------------------------------------------------
 
 $sql_buku = "SELECT judul, file_buku FROM buku WHERE id_buku = ?";
@@ -60,8 +60,37 @@ if (!$buku) {
 $stmt_buku->close();
 $conn->close();
 
-// Buat path yang benar ke file PDF (naik satu level, lalu masuk folder files)
+// Buat path yang benar ke file PDF
 $file_path = "../files/" . $buku['file_buku'];
+
+// -----------------------------------------------------------------------------
+// TAHAP BARU: STREAMING FILE PDF JIKA DIMINTA
+// Ini adalah logika baru untuk menyajikan file secara aman
+// -----------------------------------------------------------------------------
+if (isset($_GET['stream']) && $_GET['stream'] === 'true') {
+    if (file_exists($file_path)) {
+        // Set header agar browser menampilkan PDF (inline) bukan mengunduh (attachment)
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: inline; filename="' . basename($file_path) . '"');
+        header('Content-Transfer-Encoding: binary');
+        header('Accept-Ranges: bytes');
+        
+        // Nonaktifkan caching untuk keamanan
+        header('Cache-Control: no-cache, no-store, must-revalidate');
+        header('Pragma: no-cache');
+        
+        // Baca file dan kirimkan isinya ke browser
+        @readfile($file_path);
+        
+        // Hentikan eksekusi skrip setelah file dikirim
+        exit();
+    } else {
+        http_response_code(404);
+        die("File tidak ditemukan di server.");
+    }
+}
+
+// Jika tidak sedang streaming, tampilkan halaman HTML seperti biasa
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -73,27 +102,49 @@ $file_path = "../files/" . $buku['file_buku'];
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-  /* Membuat body dan html memenuhi tinggi layar */
+  /* CSS Anda tidak perlu diubah */
   html,
   body {
     height: 100%;
     margin: 0;
     overflow: hidden;
-    /* Mencegah scroll di body utama */
   }
 
-  /* Membuat wrapper utama menjadi flexbox dengan arah kolom */
   .page-wrapper {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
 
-  /* Konten utama (viewer) akan mengisi sisa ruang */
   .viewer-container {
     flex-grow: 1;
     border: none;
-    /* Menghilangkan border pada iframe */
+  }
+
+  /* Wrapper sekarang menjadi item yang mengisi ruang */
+  .viewer-wrapper {
+    position: relative;
+    flex-grow: 1;
+  }
+
+  /* iframe (viewer-container) harus mengisi 100% dari wrapper-nya */
+  .viewer-container {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Overlay untuk membantu menonaktifkan klik kanan */
+  .viewer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: transparent;
+    pointer-events: none;
+    /* <-- TAMBAHKAN BARIS INI */
   }
   </style>
 </head>
@@ -112,11 +163,14 @@ $file_path = "../files/" . $buku['file_buku'];
       </div>
     </header>
 
-    <iframe class="viewer-container" src="<?php echo htmlspecialchars($file_path); ?>"
-      title="PDF Viewer untuk <?php echo htmlspecialchars($buku['judul']); ?>">
-      Browser Anda tidak mendukung iframe, silakan unduh PDF <a href="<?php echo htmlspecialchars($file_path); ?>">di
-        sini</a>.
-    </iframe>
+    <div class="viewer-wrapper" oncontextmenu="return false;">
+      <iframe class="viewer-container" src="?id=<?php echo htmlspecialchars($id_buku); ?>&stream=true#toolbar=0"
+        title="PDF Viewer untuk <?php echo htmlspecialchars($buku['judul']); ?>">
+        Browser Anda tidak mendukung tampilan PDF secara langsung.
+      </iframe>
+      <div class="viewer-overlay"></div>
+    </div>
+
   </div>
 
   <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>

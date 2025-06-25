@@ -129,6 +129,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         session_regenerate_id(true);
 
+      // Redirect ke loginpage.php dengan parameter sukses dan role
+      header("Location: loginpage.php?login_success=1&role=$found_user_role");
+      exit();
+
         if ($found_user_role === 'pembaca') {
             header("Location: ../Pembaca/BerandaPembaca.php");
         } elseif ($found_user_role === 'penulis') {

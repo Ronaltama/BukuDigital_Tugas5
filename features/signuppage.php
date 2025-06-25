@@ -19,6 +19,29 @@
   <div class="tempatlogin">
     <div class="loginbackground"></div>
     <div class="login-container">
+      <?php
+    // Notifikasi gagal signup
+    if (isset($_GET['signup_failed']) && $_GET['signup_failed'] == 1) {
+        $msg = "Registrasi gagal. ";
+        if (isset($_GET['error']) && $_GET['error'] == "duplikat") {
+            $msg .= "Email atau Username sudah terdaftar. Silakan gunakan yang lain.";
+        } else {
+            $msg .= "Terjadi kesalahan. Silakan coba lagi.";
+        }
+        echo '<div class="alert alert-danger text-center" role="alert">' . $msg . '</div>';
+    }
+
+    // Notifikasi berhasil signup & redirect otomatis ke login
+    if (isset($_GET['signup_success']) && $_GET['signup_success'] == 1) {
+        $role = isset($_GET['role']) ? $_GET['role'] : '';
+        echo '<div class="alert alert-success text-center" role="alert">Registrasi berhasil sebagai <b>' . htmlspecialchars($role) . '</b>! Anda akan diarahkan ke halaman login...</div>';
+        echo "<script>
+            setTimeout(function() {
+                window.location.href = 'loginpage.php';
+            }, 2000);
+        </script>";
+    }
+  ?>
       <form action="proses_register.php" method="POST">
         <input type="email" placeholder="Alamat Email" name="email" required />
         <br /><br />

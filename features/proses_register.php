@@ -84,63 +84,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Hash password sebelum disimpan ke database (SANGAT PENTING!)
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    // --- 2. Cek Duplikasi Email atau Username di Kedua Tabel ---
-    // Cek di tabel 'pembaca'
-    $stmt_check_pembaca = $conn->prepare("SELECT id_pembaca FROM pembaca WHERE email = ? OR username = ?");
-    $stmt_check_pembaca->bind_param("ss", $email, $username);
-    $stmt_check_pembaca->execute();
-    $result_check_pembaca = $stmt_check_pembaca->get_result();
-    if ($result_check_pembaca->num_rows > 0) {
-        $stmt_check_pembaca->close();
-        die("Email atau Username sudah terdaftar sebagai pembaca. Coba email/username lain.");
-    }
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+$stmt_check_pembaca = $conn->prepare("SELECT id_pembaca FROM pembaca WHERE email = ? OR username = ?");
+$stmt_check_pembaca->bind_param("ss", $email, $username);
+$stmt_check_pembaca->execute();
+$result_check_pembaca = $stmt_check_pembaca->get_result();
+if ($result_check_pembaca->num_rows > 0) {
     $stmt_check_pembaca->close();
+    header("Location: signuppage.php?signup_failed=1&error=duplikat");
+    exit();
+}
+$stmt_check_pembaca->close();
 
-    // Cek di tabel 'penulis'
-    $stmt_check_penulis = $conn->prepare("SELECT id_penulis FROM penulis WHERE email = ? OR username = ?");
-    $stmt_check_penulis->bind_param("ss", $email, $username);
-    $stmt_check_penulis->execute();
-    $result_check_penulis = $stmt_check_penulis->get_result();
-    if ($result_check_penulis->num_rows > 0) {
-        $stmt_check_penulis->close();
-        die("Email atau Username sudah terdaftar sebagai penulis. Coba email/username lain.");
-    }
+// Cek di tabel 'penulis'
+$stmt_check_penulis = $conn->prepare("SELECT id_penulis FROM penulis WHERE email = ? OR username = ?");
+$stmt_check_penulis->bind_param("ss", $email, $username);
+$stmt_check_penulis->execute();
+$result_check_penulis = $stmt_check_penulis->get_result();
+if ($result_check_penulis->num_rows > 0) {
     $stmt_check_penulis->close();
+    header("Location: signuppage.php?signup_failed=1&error=duplikat");
+    exit();
+}
+$stmt_check_penulis->close();
 
+// --- 3. Masukkan Data ke Database Sesuai Role ---
+$new_user_id = '';
+$status_default = 'aktif';
 
-    // --- 3. Masukkan Data ke Database Sesuai Role ---
-    $new_user_id = ''; // Variabel untuk menyimpan ID yang akan di-generate
-// Definisikan variabel untuk status
-    $status_default = 'aktif';
-
-    if ($role === 'pembaca') {
-        $new_user_id = generateUniqueId($conn, 'pembaca', 'id_pembaca', 'PBC');
-        $stmt_insert = $conn->prepare("INSERT INTO pembaca (id_pembaca, email, username, password, status) VALUES (?, ?, ?, ?, ?)");
-        $stmt_insert->bind_param("sssss", $new_user_id, $email, $username, $hashed_password, $status_default); // <-- Ubah di sini
-
-    } elseif ($role === 'penulis') {
-        $new_user_id = generateUniqueId($conn, 'penulis', 'id_penulis', 'PEN');
-        $stmt_insert = $conn->prepare("INSERT INTO penulis (id_penulis, email, username, password, status) VALUES (?, ?, ?, ?, ?)");
-        $stmt_insert->bind_param("sssss", $new_user_id, $email, $username, $hashed_password, $status_default); // <-- Ubah di sini
-
-    } else {
-        die("Pilihan role tidak valid.");
-    }
+if ($role === 'pembaca') {
+    $new_user_id = generateUniqueId($conn, 'pembaca', 'id_pembaca', 'PBC');
+    $stmt_insert = $conn->prepare("INSERT INTO pembaca (id_pembaca, email, username, password, status) VALUES (?, ?, ?, ?, ?)");
+    $stmt_insert->bind_param("sssss", $new_user_id, $email, $username, $hashed_password, $status_default);
+} elseif ($role === 'penulis') {
+    $new_user_id = generateUniqueId($conn, 'penulis', 'id_penulis', 'PEN');
+    $stmt_insert = $conn->prepare("INSERT INTO penulis (id_penulis, email, username, password, status) VALUES (?, ?, ?, ?, ?)");
+    $stmt_insert->bind_param("sssss", $new_user_id, $email, $username, $hashed_password, $status_default);
+} else {
+    die("Pilihan role tidak valid.");
+}
 
 if ($stmt_insert->execute()) {
-    echo "<script>
-            alert('Registrasi berhasil sebagai $role! ID: $new_user_id');
-            window.location.href = 'loginpage.php'; 
-          </script>";
-    exit(); // Always good practice to exit after a redirect, even with JS
+    header("Location: signuppage.php?signup_success=1&role=$role");
+    exit();
 } else {
-    echo "Error registrasi: " . $stmt_insert->error;
+    header("Location: signuppage.php?signup_failed=1&error=insert");
+    exit();
 }
-    $stmt_insert->close();
-    // Tutup koneksi database
-    $conn->close();
+$stmt_insert->close();
+$conn->close();
 
 } else {
     // Jika diakses langsung tanpa submit form

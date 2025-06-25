@@ -59,6 +59,20 @@
             if (isset($_GET['login_failed']) && $_GET['login_failed'] == 1) {
                 echo '<div class="error-message">Email atau password salah. Silakan coba lagi.</div>';
             }
+                // Notifikasi login berhasil & redirect otomatis
+    if (isset($_GET['login_success']) && $_GET['login_success'] == 1) {
+        $role = isset($_GET['role']) ? $_GET['role'] : '';
+        $redirect = "#";
+        if ($role == "pembaca") $redirect = "../Pembaca/BerandaPembaca.php";
+        elseif ($role == "penulis") $redirect = "../Penulis/berandaPenulis.php";
+        elseif ($role == "operator") $redirect = "../Operator/berandaOperator.php";
+        echo '<div class="alert alert-success text-center" role="alert">Login berhasil! Anda akan diarahkan ke beranda...</div>';
+        echo "<script>
+            setTimeout(function() {
+                window.location.href = '$redirect';
+            }, 2000);
+        </script>";
+    }
             ?>
       <form action="proses_login.php" method="POST">
         <input type="email" placeholder="Email" name="email" required />
