@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2025 at 04:25 PM
+-- Generation Time: Jun 29, 2025 at 02:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,8 +60,9 @@ INSERT INTO `buku` (`id_buku`, `judul`, `deskripsi`, `cover_url`, `rating`, `har
 ('BKU011', 'Insecurity is my Middle Name', 'Buku self-help yang jujur dan menginspirasi tentang pentingnya membangun kepercayaan diri dan mengatasi rasa tidak aman. Memberikan wawasan dan strategi untuk mencintai diri sendiri apa adanya.', 'http://localhost/Web%20Buku%20Digital%20Online/BukuDigital_Tugas5/covers/Insecurity%20is%20my%20Middle%20Name_Alvi%20Syahrin.jpg', 4.3, 11500.00, 'insecurity.pdf', 'Non Fiksi', 'terverifikasi', '2024-02-25', 'PEN0010', 'OP01'),
 ('BKU012', 'You do You', 'Buku motivasi yang mendorong pembaca untuk menjadi diri sendiri, merangkul keunikan, dan tidak terpaku pada ekspektasi orang lain. Mengajarkan pentingnya otentisitas dan kebahagiaan dari dalam diri.', 'http://localhost/Web%20Buku%20Digital%20Online/BukuDigital_Tugas5/covers/You%20do%20You_Fellexandro%20Ruby.jpg', 4.4, 12000.00, 'you_do_you.pdf', 'Non Fiksi', 'terverifikasi', '2024-03-01', 'PEN0011', 'OP02'),
 ('BKU013', 'Gadis Kretek', 'Gadis Kretek adalah sebuah novel fiksi sejarah yang ditulis oleh Ratih Kumala dan pertama kali diterbitkan pada tahun 2012. Novel ini sukses besar dan bahkan diadaptasi menjadi serial populer oleh Netflix pada tahun 2023.\r\n\r\nNovel ini bukan sekadar kisah romansa, tetapi juga menyelami sejarah industri kretek di Indonesia, intrik keluarga, persaingan bisnis,', 'http://localhost/Web%20Buku%20Digital%20Online/BukuDigital_Tugas5/covers/Gadis%20Kretek-Ratih%20Kumala.jpg', 4.0, 13000.00, 'Gadis Kretek.pdf', 'Fiksi', 'pending', '2024-03-05', 'PEN0003', 'OP01'),
-('BKU014', 'Ronggeng Dukuh Paruk', 'Sebuah cerita yang memotret kehidupan urban, hiruk pikuk kota, dan perjuangan individu di dalamnya. Menggambarkan kerumitan hubungan antarmanusia dan pencarian makna di tengah modernitas.', 'http://localhost/Web%20Buku%20Digital%20Online/BukuDigital_Tugas5/covers/Ronggeng%20Dukuh%20Paruk_Ahmad%20Tohari.jpg', 4.2, 10500.00, 'Ronggeng Dukuh Paruk.pdf', 'Fiksi', 'terverifikasi', '2024-03-10', 'PEN0008', 'OP04'),
-('BKU015', 'Tanah Para Bandit', '\"Tanah Para Bandit\" adalah novel karya Tere Liye, seorang penulis fiksi populer asal Indonesia. Buku ini merupakan bagian dari seri petualangan \"Aldi dan Amelia\", atau lebih dikenal sebagai serial \"Negeri Para Bedebah\" dan \"Negeri di Ujung Tanduk\". Meskipun sering disebut sebagai prekuel atau pelengkap dari kedua novel tersebut, \"Tanah Para Bandit\" memiliki fokus cerita yang berbeda dengan sudut pandang yang lebih spesifik.', 'http://localhost/Web%20Buku%20Digital%20Online/BukuDigital_Tugas5/covers/cover_683c4abaa5d09.jpg', 0.0, 30000.00, 'http://localhost/Web%20Buku%20Digital%20Online/BukuDigital_Tugas5/files/buku_683c4abaa6174.pdf', 'Non-Fiksi', 'pending', '2025-06-01', 'PEN0001', 'OP01');
+('BKU014', 'RonggengDukuhParuk', 'Sebuah cerita yang memotret kehidupan urban, hiruk pikuk kota, dan perjuangan individu di dalamnya. Menggambarkan kerumitan hubungan antarmanusia dan pencarian makna di tengah modernitas.', 'http://localhost/Web%20Buku%20Digital%20Online/BukuDigital_Tugas5/covers/Ronggeng%20Dukuh%20Paruk_Ahmad%20Tohari.jpg', 4.2, 10500.00, 'ronggeng_dukuh_paruk.pdf', 'Fiksi', 'terverifikasi', '2024-03-10', 'PEN0008', 'OP04'),
+('BKU017', 'Sebuah Seni untuk Bersikap Bodo Amat', 'Buku ini mengajak pembaca untuk melihat hidup dari sudut pandang yang lebih realistis dan jujur. Mark Manson, seorang blogger dan penulis populer, menyampaikan pesan bahwa hidup tidak harus selalu bahagia dan sempurna. Justru dengan menerima kenyataan pahit, kegagalan, dan keterbatasan, seseorang bisa menemukan kedamaian dan makna hidup yang lebih dalam.\r\n\r\nMelalui gaya bahasa yang lugas, blak-blakan, dan kadang sarkastik, Manson menyampaikan filosofi “bodo amat” — bukan berarti tidak peduli sama sekali, tapi lebih kepada memilih dengan bijak apa yang layak untuk dipedulikan. Kita sering terlalu sibuk mencoba membahagiakan semua orang, mengejar validasi, atau khawatir tentang hal-hal sepele. Buku ini menekankan pentingnya memfokuskan perhatian dan energi hanya pada hal-hal yang benar-benar penting bagi kita.', 'http://localhost/Web%20Buku%20Digital%20Online/BukuDigital_Tugas5/covers/cover_685c8386808b6.jpg', 0.0, 20000.00, 'buku_685c8386818dd.pdf', 'Fiksi', 'terverifikasi', '2025-06-26', 'PEN0001', 'OP01'),
+('BKU018', 'Yellow Face', 'Yellowface adalah novel satire tajam yang membongkar sisi gelap industri penerbitan, rasisme sistemik, dan obsesi terhadap kepemilikan narasi. Cerita mengikuti June Hayward, seorang penulis kulit putih biasa-biasa saja yang menyaksikan sahabat sekaligus rivalnya, Athena Liu — penulis Asia-Amerika sukses — meninggal mendadak. Dalam kekalutan dan iri hati, June mengambil naskah terakhir Athena, menyuntingnya, dan menerbitkannya atas nama barunya: Juniper Song, menyamarkan identitasnya agar terlihat sebagai penulis keturunan Asia.\r\n\r\nKesuksesan cepat datang, tapi begitu pula tekanan dan pertanyaan tentang keaslian. Ketika kebenaran mulai mengintai dan orang-orang mulai curiga, June harus menghadapi pertanyaan besar tentang identitas, moralitas, dan siapa yang berhak menceritakan kisah siapa.', 'http://localhost/Web%20Buku%20Digital%20Online/BukuDigital_Tugas5/covers/cover_685c8baa87662.jpg', 0.0, 15000.00, 'buku_685c8baa87988.pdf', 'Pengembangan Diri', 'terverifikasi', '2025-06-26', 'PEN0001', 'OP01');
 
 -- --------------------------------------------------------
 
@@ -71,10 +72,11 @@ INSERT INTO `buku` (`id_buku`, `judul`, `deskripsi`, `cover_url`, `rating`, `har
 
 CREATE TABLE `detail_pesanan` (
   `id_pemesanan` char(8) NOT NULL,
-  `id_sewa` char(8) NOT NULL,
+  `id_pembaca` char(7) NOT NULL,
   `id_buku` char(8) NOT NULL,
+  `durasi_sewa` int(11) NOT NULL,
   `total_harga` decimal(10,2) NOT NULL,
-  `status_pemesanan` enum('menunggu','diproses','selesai','dibatalkan') NOT NULL,
+  `status_pemesanan` enum('menunggu','selesai','dibatalkan') NOT NULL,
   `tanggal_pesanan` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -82,21 +84,15 @@ CREATE TABLE `detail_pesanan` (
 -- Dumping data for table `detail_pesanan`
 --
 
-INSERT INTO `detail_pesanan` (`id_pemesanan`, `id_sewa`, `id_buku`, `total_harga`, `status_pemesanan`, `tanggal_pesanan`) VALUES
-('DP000001', '00000001', 'BKU001', 15000.00, 'diproses', '2024-04-01'),
-('DP000002', '00000002', 'BKU002', 35000.00, 'diproses', '2024-04-02'),
-('DP000003', '00000003', 'BKU003', 70000.00, 'selesai', '2024-04-03'),
-('DP000004', '00000004', 'BKU004', 150000.00, 'diproses', '2024-04-04'),
-('DP000005', '00000005', 'BKU005', 15000.00, 'diproses', '2024-04-05'),
-('DP000006', '00000006', 'BKU006', 35000.00, 'selesai', '2024-04-06'),
-('DP000007', '00000007', 'BKU007', 70000.00, 'diproses', '2024-04-07'),
-('DP000008', '00000008', 'BKU008', 150000.00, 'selesai', '2024-04-08'),
-('DP000009', '00000009', 'BKU009', 15000.00, 'diproses', '2024-04-09'),
-('DP000010', '00000010', 'BKU010', 35000.00, 'diproses', '2024-04-10'),
-('DP000011', '00000011', 'BKU011', 70000.00, 'diproses', '2024-04-11'),
-('DP000012', '00000012', 'BKU012', 150000.00, 'selesai', '2024-04-12'),
-('DP000013', '00000013', 'BKU013', 15000.00, 'diproses', '2024-04-13'),
-('DP000014', '00000014', 'BKU014', 35000.00, 'diproses', '2024-04-14');
+INSERT INTO `detail_pesanan` (`id_pemesanan`, `id_pembaca`, `id_buku`, `durasi_sewa`, `total_harga`, `status_pemesanan`, `tanggal_pesanan`) VALUES
+('DP000001', 'PBC0001', 'BKU007', 7, 5215.00, 'selesai', '2025-06-10'),
+('DP000002', 'PBC0002', 'BKU010', 30, 16950.00, 'selesai', '2025-06-11'),
+('DP000003', 'PBC0003', 'BKU004', 14, 9560.00, 'selesai', '2025-05-01'),
+('DP000004', 'PBC0003', 'BKU014', 3, 3680.00, 'selesai', '2025-06-12'),
+('DP000005', 'PBC0003', 'BKU001', 3, 4400.00, 'selesai', '2025-06-12'),
+('DP000006', 'PBC0003', 'BKU017', 30, 17000.00, 'selesai', '2025-06-26'),
+('DP000007', 'PBC0025', 'BKU017', 14, 10400.00, 'selesai', '2025-06-26'),
+('DP000008', 'PBC0002', 'BKU018', 7, 6987.50, 'menunggu', '2025-06-26');
 
 -- --------------------------------------------------------
 
@@ -144,8 +140,8 @@ CREATE TABLE `pembaca` (
 --
 
 INSERT INTO `pembaca` (`id_pembaca`, `username`, `email`, `password`, `status`, `tanggal_daftar`) VALUES
-('PBC0001', 'rexy12', 'rexy12@gmail.com', '$2y$10$5kBBKtW6k8XogZrey2KSkeZj1XJHH39D9ZCpsOUzE9uy/oUgm2bI2', 'aktif', '2024-01-01'),
-('PBC0002', 'zayn88', 'zayn88@gmail.com', '$2y$10$2KpfWgqZXsFaDUjjRXG2veWilKfJDbbDcUMBCibXCwUwKrUpGUfPi', 'aktif', '2024-01-03'),
+('PBC0001', 'rexy12', 'rexy12@gmail.com', '$2y$10$5kBBKtW6k8XogZrey2KSkeZj1XJHH39D9ZCpsOUzE9uy/oUgm2bI2', 'nonaktif', '2024-01-01'),
+('PBC0002', 'zayn88', 'zayn88@gmail.com', '$2y$10$2KpfWgqZXsFaDUjjRXG2veWilKfJDbbDcUMBCibXCwUwKrUpGUfPi', 'nonaktif', '2024-01-03'),
 ('PBC0003', 'alya_kk', 'alya_kk@gmail.com', '$2y$10$8xY..ZQ3r9eRbiGib.m2T.k3ljIWmvzoIqmbpyLbPb/yzInjctc7y', 'aktif', '2024-01-05'),
 ('PBC0004', 'thaliax', 'thaliax@gmail.com', '$2y$10$CUG7ThO/KTUVzvTLX19vYucmL58HDR7mCVGaww6uIdt2awD5wPbwq', 'aktif', '2024-01-08'),
 ('PBC0005', 'donny12', 'donny12@gmail.com', '$2y$10$urbOo4q/X5GhWJL4eQ/7/ePhWIb0Y6zOaETPVHtH74L6l0lHgOF/W', 'nonaktif', '2024-01-10'),
@@ -167,7 +163,8 @@ INSERT INTO `pembaca` (`id_pembaca`, `username`, `email`, `password`, `status`, 
 ('PBC0021', 'tama', 'apaja@gmail.com', '$2y$10$af0qoIzVBVt4A0GggmwmGOvGJprH6wWwTa/AjzF8kO0dMedwdWKnq', 'aktif', '0000-00-00'),
 ('PBC0022', 'iqbal', 'iqbaall@student.uns.ac.id', '$2y$10$jVhvnkYn5dCNtU2MLl8mIeWlpY8jD1ReYmYjyHoIjIcJgtoKSmpK2', 'aktif', '0000-00-00'),
 ('PBC0023', 'aqila', 'aqila@gmail.com', '$2y$10$798NeGMQIwSsDXE9k/iu7eOBbyNGrS6Fp66eVEeeFGg/hyE9emJ2y', 'aktif', '0000-00-00'),
-('PBC0024', 'aaa', 'aaa@gmail.com', '$2y$10$flxhY7O8F6VyFKLkT.mBk.gjw5ybdNNt5JA.FC1ECRIVuO764gVVK', 'aktif', '0000-00-00');
+('PBC0024', 'aaa', 'aaa@gmail.com', '$2y$10$flxhY7O8F6VyFKLkT.mBk.gjw5ybdNNt5JA.FC1ECRIVuO764gVVK', 'aktif', '0000-00-00'),
+('PBC0025', 'bagas', 'bagasardian@gmail.com', '$2y$10$CmDXyNmfFJwNbd3lQdX7IeshIM1PJ/XC14mHc5K/IIQI/ts2xPlCW', 'aktif', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -177,37 +174,25 @@ INSERT INTO `pembaca` (`id_pembaca`, `username`, `email`, `password`, `status`, 
 
 CREATE TABLE `pembayaran` (
   `id_pembayaran` varchar(8) NOT NULL,
+  `id_pemesanan` char(8) NOT NULL,
   `jumlah` decimal(10,2) NOT NULL,
   `tgl_pembayaran` date NOT NULL,
-  `status_pembayaran` varchar(20) NOT NULL,
-  `id_sewa` char(8) NOT NULL
+  `status_pembayaran` enum('pending','berhasil','gagal') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pembayaran`
 --
 
-INSERT INTO `pembayaran` (`id_pembayaran`, `jumlah`, `tgl_pembayaran`, `status_pembayaran`, `id_sewa`) VALUES
-('1', 50000.00, '2025-01-05', 'berhasil', '00000001'),
-('10', 55000.00, '2025-01-21', 'berhasil', '00000010'),
-('11', 62000.00, '2025-01-23', 'gagal', '00000011'),
-('12', 47000.00, '2025-01-25', 'berhasil', '00000012'),
-('13', 100000.00, '2025-01-26', 'berhasil', '00000013'),
-('14', 39000.00, '2025-01-28', 'berhasil', '00000014'),
-('15', 89000.00, '2025-01-30', 'pending', '00000015'),
-('16', 73000.00, '2025-02-01', 'berhasil', '00000016'),
-('17', 81000.00, '2025-02-03', 'berhasil', '00000017'),
-('18', 45000.00, '2025-02-05', 'berhasil', '00000018'),
-('19', 92000.00, '2025-02-07', 'gagal', '00000019'),
-('2', 75000.00, '2025-01-07', 'berhasil', '00000002'),
-('20', 67000.00, '2025-02-10', 'berhasil', '00000020'),
-('3', 100000.00, '2025-01-09', 'pending', '00000003'),
-('4', 30000.00, '2025-01-10', 'berhasil', '00000004'),
-('5', 65000.00, '2025-01-11', 'gagal', '00000005'),
-('6', 80000.00, '2025-01-13', 'berhasil', '00000006'),
-('7', 95000.00, '2025-01-15', 'berhasil', '00000007'),
-('8', 50000.00, '2025-01-17', 'pending', '00000008'),
-('9', 70000.00, '2025-01-20', 'berhasil', '00000009');
+INSERT INTO `pembayaran` (`id_pembayaran`, `id_pemesanan`, `jumlah`, `tgl_pembayaran`, `status_pembayaran`) VALUES
+('1', 'DP000001', 5215.00, '2025-06-10', 'berhasil'),
+('2', 'DP000002', 16950.00, '2025-06-11', 'berhasil'),
+('3', 'DP000003', 9560.00, '2025-05-01', 'berhasil'),
+('4', 'DP000004', 3680.00, '2025-06-12', 'berhasil'),
+('5', 'DP000005', 4400.00, '2025-06-12', 'berhasil'),
+('6', 'DP000006', 17000.00, '2025-06-26', 'berhasil'),
+('7', 'DP000007', 10400.00, '2025-06-26', 'berhasil'),
+('8', 'DP000008', 6987.50, '2025-06-26', 'pending');
 
 -- --------------------------------------------------------
 
@@ -258,10 +243,11 @@ INSERT INTO `penulis` (`id_penulis`, `username`, `email`, `password`, `status`, 
 
 CREATE TABLE `sewa` (
   `id_sewa` char(8) NOT NULL,
+  `id_pemesanan` char(8) DEFAULT NULL,
   `tgl_sewa` date NOT NULL,
   `tgl_kembali` date NOT NULL,
   `durasi_sewa` int(11) NOT NULL,
-  `status_sewa` varchar(20) NOT NULL,
+  `status_sewa` enum('dipinjam','kembali') NOT NULL,
   `id_pembaca` char(7) NOT NULL,
   `id_buku` char(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -270,27 +256,14 @@ CREATE TABLE `sewa` (
 -- Dumping data for table `sewa`
 --
 
-INSERT INTO `sewa` (`id_sewa`, `tgl_sewa`, `tgl_kembali`, `durasi_sewa`, `status_sewa`, `id_pembaca`, `id_buku`) VALUES
-('00000001', '2024-04-01', '2024-04-04', 3, 'dipinjam', 'PBC0001', 'BKU001'),
-('00000002', '2024-04-02', '2024-04-09', 7, 'dipinjam', 'PBC0002', 'BKU002'),
-('00000003', '2024-04-03', '2024-04-17', 14, 'kembali', 'PBC0003', 'BKU003'),
-('00000004', '2024-04-04', '2024-05-04', 30, 'dipinjam', 'PBC0004', 'BKU004'),
-('00000005', '2024-04-05', '2024-04-08', 3, 'dipinjam', 'PBC0005', 'BKU005'),
-('00000006', '2024-04-06', '2024-04-13', 7, 'kembali', 'PBC0006', 'BKU006'),
-('00000007', '2024-04-07', '2024-04-21', 14, 'dipinjam', 'PBC0007', 'BKU007'),
-('00000008', '2024-04-08', '2024-05-08', 30, 'kembali', 'PBC0008', 'BKU008'),
-('00000009', '2024-04-09', '2024-04-12', 3, 'dipinjam', 'PBC0009', 'BKU009'),
-('00000010', '2024-04-10', '2024-04-17', 7, 'dipinjam', 'PBC0010', 'BKU010'),
-('00000011', '2024-04-11', '2024-04-25', 14, 'dipinjam', 'PBC0011', 'BKU011'),
-('00000012', '2024-04-12', '2024-05-12', 30, 'kembali', 'PBC0012', 'BKU012'),
-('00000013', '2024-04-13', '2024-04-16', 3, 'dipinjam', 'PBC0013', 'BKU013'),
-('00000014', '2024-04-14', '2024-04-21', 7, 'dipinjam', 'PBC0014', 'BKU014'),
-('00000015', '2024-04-15', '2024-04-29', 14, 'kembali', 'PBC0015', 'BKU015'),
-('00000016', '2024-04-16', '2024-05-16', 30, 'dipinjam', 'PBC0016', 'BKU016'),
-('00000017', '2024-04-17', '2024-04-20', 3, 'dipinjam', 'PBC0017', 'BKU017'),
-('00000018', '2024-04-18', '2024-04-25', 7, 'kembali', 'PBC0018', 'BKU018'),
-('00000019', '2024-04-19', '2024-05-03', 14, 'dipinjam', 'PBC0019', 'BKU019'),
-('00000020', '2024-04-20', '2024-05-20', 30, 'dipinjam', 'PBC0020', 'BKU020');
+INSERT INTO `sewa` (`id_sewa`, `id_pemesanan`, `tgl_sewa`, `tgl_kembali`, `durasi_sewa`, `status_sewa`, `id_pembaca`, `id_buku`) VALUES
+('00000001', 'DP000001', '2025-06-10', '2025-06-17', 7, 'dipinjam', 'PBC0001', 'BKU007'),
+('00000002', 'DP000003', '2025-05-01', '2025-05-15', 14, 'kembali', 'PBC0003', 'BKU004'),
+('00000003', 'DP000002', '2025-06-12', '2025-07-12', 30, 'dipinjam', 'PBC0002', 'BKU010'),
+('00000004', 'DP000004', '2025-06-12', '2025-06-15', 3, 'dipinjam', 'PBC0003', 'BKU014'),
+('00000005', 'DP000005', '2025-06-12', '2025-06-15', 3, 'dipinjam', 'PBC0003', 'BKU001'),
+('00000006', 'DP000006', '2025-06-26', '2025-07-26', 30, 'dipinjam', 'PBC0003', 'BKU017'),
+('00000007', 'DP000007', '2025-06-26', '2025-07-10', 14, 'dipinjam', 'PBC0025', 'BKU017');
 
 --
 -- Indexes for dumped tables
@@ -309,9 +282,8 @@ ALTER TABLE `buku`
 --
 ALTER TABLE `detail_pesanan`
   ADD PRIMARY KEY (`id_pemesanan`),
-  ADD UNIQUE KEY `id_pemesanan` (`id_pemesanan`),
-  ADD KEY `id_sewa` (`id_sewa`),
-  ADD KEY `id_buku` (`id_buku`);
+  ADD KEY `id_buku` (`id_buku`),
+  ADD KEY `id_pembaca_pesanan_idx` (`id_pembaca`);
 
 --
 -- Indexes for table `operator`
@@ -334,7 +306,7 @@ ALTER TABLE `pembaca`
 --
 ALTER TABLE `pembayaran`
   ADD PRIMARY KEY (`id_pembayaran`),
-  ADD UNIQUE KEY `id_sewa` (`id_sewa`);
+  ADD KEY `id_pemesanan_pembayaran_idx` (`id_pemesanan`);
 
 --
 -- Indexes for table `penulis`
@@ -350,7 +322,8 @@ ALTER TABLE `penulis`
 ALTER TABLE `sewa`
   ADD PRIMARY KEY (`id_sewa`),
   ADD KEY `id_pembaca` (`id_pembaca`),
-  ADD KEY `id_buku` (`id_buku`);
+  ADD KEY `id_buku` (`id_buku`),
+  ADD KEY `id_pemesanan_sewa_idx` (`id_pemesanan`);
 
 --
 -- Constraints for dumped tables
@@ -367,14 +340,22 @@ ALTER TABLE `buku`
 -- Constraints for table `detail_pesanan`
 --
 ALTER TABLE `detail_pesanan`
-  ADD CONSTRAINT `detail_pesanan_ibfk_1` FOREIGN KEY (`id_sewa`) REFERENCES `sewa` (`id_sewa`),
-  ADD CONSTRAINT `detail_pesanan_ibfk_2` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`);
+  ADD CONSTRAINT `detail_pesanan_ibfk_1` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`),
+  ADD CONSTRAINT `detail_pesanan_ibfk_2` FOREIGN KEY (`id_pembaca`) REFERENCES `pembaca` (`id_pembaca`);
 
 --
 -- Constraints for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_sewa`) REFERENCES `sewa` (`id_sewa`);
+  ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_pemesanan`) REFERENCES `detail_pesanan` (`id_pemesanan`);
+
+--
+-- Constraints for table `sewa`
+--
+ALTER TABLE `sewa`
+  ADD CONSTRAINT `sewa_ibfk_1` FOREIGN KEY (`id_pembaca`) REFERENCES `pembaca` (`id_pembaca`),
+  ADD CONSTRAINT `sewa_ibfk_2` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`),
+  ADD CONSTRAINT `sewa_ibfk_3` FOREIGN KEY (`id_pemesanan`) REFERENCES `detail_pesanan` (`id_pemesanan`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
