@@ -47,7 +47,7 @@ if ($result_cek->num_rows > 0) {
     $sewa_aktif = $result_cek->fetch_assoc();
 } else {
     http_response_code(403);
-    die("<h2>Akses Ditolak</h2><p>Masa sewa Anda untuk buku ini telah berakhir atau Anda tidak memiliki hak akses.</p><a href='../index.php'>Kembali ke Beranda</a>");
+    die("<h2>Akses Ditolak</h2><p>Masa sewa Anda untuk buku ini telah berakhir atau Anda tidak memiliki hak akses.</p><a href='BerandaPembaca.php'>Kembali ke Beranda</a>");
 }
 $stmt_cek->close();
 

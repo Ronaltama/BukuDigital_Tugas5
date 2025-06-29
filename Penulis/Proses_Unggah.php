@@ -104,7 +104,7 @@ if (isset($_POST['upload'])) {
             }
             if (move_uploaded_file($file_buku_tmp, $upload_path_buku_server)) {
                 $upload_buku_success = true;
-                $file_buku_url_to_db = $base_url_files . rawurlencode($file_buku_filename_only); // Buat URL lengkap
+                $file_buku_url_to_db = $file_buku_filename_only; // Hanya simpan nama file saja
             } else {
                 $_SESSION['message'] = "Gagal memindahkan file buku PDF. Cek izin folder '../files/'.";
                 $_SESSION['msg_type'] = "danger";
